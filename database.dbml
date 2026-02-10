@@ -1,0 +1,83 @@
+Table Users {
+  id int [pk, increment]
+  name varchar
+  email varchar
+  password varchar
+  role varchar
+}
+
+Table Destinations {
+  id int [pk, increment]
+  city varchar
+  country varchar
+  image_url varchar
+  description text
+}
+
+Table Flights {
+  id int [pk, increment]
+  airline varchar
+  departure_city varchar
+  destination_city varchar
+  departure_airport varchar
+  destination_airport varchar
+  flight_duration varchar
+}
+
+Table Accommodations {
+  id int [pk, increment]
+  hotel_name varchar
+  hotel_type varchar
+  hotel_city varchar
+  hotel_location varchar
+  amenities text
+}
+
+Table Trips {
+  id int [pk, increment]
+  title varchar
+  description text
+  start_date date
+  end_date date
+  duration_days int
+  keywords text
+  destination_id int
+  flight_id int
+  accommodation_id int
+}
+
+Table TripPrices {
+  id int [pk, increment]
+  trip_id int
+  provider varchar
+  price decimal
+  type varchar
+}
+
+Table Favorites {
+  id int [pk, increment]
+  user_id int
+  trip_id int
+}
+
+Table ContactMessages {
+  id int [pk, increment]
+  email varchar
+  subject varchar
+  message text
+  created_at datetime
+}
+
+Ref: Trips.destination_id > Destinations.id
+Ref: Trips.flight_id > Flights.id
+Ref: Trips.accommodation_id > Accommodations.id
+
+Ref: TripPrices.trip_id > Trips.id
+
+Ref: Favorites.user_id > Users.id
+Ref: Favorites.trip_id > Trips.id
+
+// Flights have diffeerent airlines? 
+// How to show that in the website?
+
+
