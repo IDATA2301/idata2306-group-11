@@ -1,9 +1,9 @@
 Table Users {
   id int [pk, increment]
-  name varchar
+  user_name varchar
   email varchar
-  password varchar
-  role varchar
+  user_password varchar
+  user_role varchar
 }
 
 Table Destinations {
@@ -11,7 +11,7 @@ Table Destinations {
   city varchar
   country varchar
   image_url varchar
-  description text
+  destination_description text
 }
 
 Table Flights {
@@ -36,7 +36,7 @@ Table Accommodations {
 Table Trips {
   id int [pk, increment]
   title varchar
-  description text
+  trip_description text
   start_date date
   end_date date
   duration_days int
@@ -49,9 +49,9 @@ Table Trips {
 Table TripPrices {
   id int [pk, increment]
   trip_id int
-  provider varchar
+  tripprice_provider varchar
   price decimal
-  type varchar
+  tripprice_type varchar
 }
 
 Table Favorites {
@@ -63,8 +63,8 @@ Table Favorites {
 Table ContactMessages {
   id int [pk, increment]
   email varchar
-  subject varchar
-  message text
+  contactmessage_subject varchar
+  contactmessage_message text
   created_at datetime
 }
 
