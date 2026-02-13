@@ -1,0 +1,60 @@
+package com.roamroute.backend.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "destinations")
+public class Destination {
+  @Id
+  @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+  int id;
+
+  String city;
+  String country;
+  String image_url;
+  String destination_description;
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
+
+  public String getImage_url() {
+    return image_url;
+  }
+
+  public void setImage_url(String image_url) {
+    this.image_url = image_url;
+  }
+
+  public String getDestination_description() {
+    return destination_description;
+  }
+
+  public void setDestination_description(String destination_description) {
+    this.destination_description = destination_description;
+  }
+
+}
