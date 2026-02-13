@@ -1,4 +1,4 @@
-Table Users {
+Table users {
   id int [pk, increment]
   user_name varchar
   email varchar
@@ -6,7 +6,7 @@ Table Users {
   user_role varchar
 }
 
-Table Destinations {
+Table destinations {
   id int [pk, increment]
   city varchar
   country varchar
@@ -14,7 +14,7 @@ Table Destinations {
   destination_description text
 }
 
-Table Flights {
+Table flights {
   id int [pk, increment]
   airline varchar
   departure_city varchar
@@ -24,7 +24,7 @@ Table Flights {
   flight_duration varchar
 }
 
-Table Accommodations {
+Table accommodations {
   id int [pk, increment]
   hotel_name varchar
   hotel_type varchar
@@ -33,7 +33,7 @@ Table Accommodations {
   amenities text
 }
 
-Table Trips {
+Table trips {
   id int [pk, increment]
   title varchar
   trip_description text
@@ -46,7 +46,7 @@ Table Trips {
   accommodation_id int
 }
 
-Table TripPrices {
+Table tripprices {
   id int [pk, increment]
   trip_id int
   tripprice_provider varchar
@@ -54,13 +54,13 @@ Table TripPrices {
   tripprice_type varchar
 }
 
-Table Favorites {
+Table favorites {
   id int [pk, increment]
   user_id int
   trip_id int
 }
 
-Table ContactMessages {
+Table contactmessages {
   id int [pk, increment]
   email varchar
   contactmessage_subject varchar
@@ -68,14 +68,14 @@ Table ContactMessages {
   created_at datetime
 }
 
-Ref: Trips.destination_id > Destinations.id
-Ref: Trips.flight_id > Flights.id
-Ref: Trips.accommodation_id > Accommodations.id
+Ref: trips.destination_id > destinations.id
+Ref: trips.flight_id > flights.id
+Ref: trips.accommodation_id > accommodations.id
 
-Ref: TripPrices.trip_id > Trips.id
+Ref: tripprices.trip_id > trips.id
 
-Ref: Favorites.user_id > Users.id
-Ref: Favorites.trip_id > Trips.id
+Ref: favorites.user_id > users.id
+Ref: favorites.trip_id > trips.id
 
 // Flights have diffeerent airlines? 
 // How to show that in the website?
