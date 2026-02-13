@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS idata2306_travel;
 USE idata2306_travel;
 
 -- Users table
-CREATE TABLE Users (
+CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_name VARCHAR(255),
   email VARCHAR(255),
@@ -12,7 +12,7 @@ CREATE TABLE Users (
 );
 
 -- Destinations table
-CREATE TABLE Destinations (
+CREATE TABLE destinations (
   id INT PRIMARY KEY AUTO_INCREMENT,
   city VARCHAR(255),
   country VARCHAR(255),
@@ -21,7 +21,7 @@ CREATE TABLE Destinations (
 );
 
 -- Flights table
-CREATE TABLE Flights (
+CREATE TABLE flights (
   id INT PRIMARY KEY AUTO_INCREMENT,
   airline VARCHAR(255),
   departure_city VARCHAR(255),
@@ -32,7 +32,7 @@ CREATE TABLE Flights (
 );
 
 -- Accommodations table
-CREATE TABLE Accommodations (
+CREATE TABLE accommodations (
   id INT PRIMARY KEY AUTO_INCREMENT,
   hotel_name VARCHAR(255),
   hotel_type VARCHAR(100),
@@ -42,7 +42,7 @@ CREATE TABLE Accommodations (
 );
 
 -- Trips table
-CREATE TABLE Trips (
+CREATE TABLE trips (
   id INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(255),
   trip_description TEXT,
@@ -59,7 +59,7 @@ CREATE TABLE Trips (
 );
 
 -- TripPrices table
-CREATE TABLE TripPrices (
+CREATE TABLE tripprices (
   id INT PRIMARY KEY AUTO_INCREMENT,
   trip_id INT,
   tripprice_provider VARCHAR(255),
@@ -69,7 +69,7 @@ CREATE TABLE TripPrices (
 );
 
 -- Favorites table
-CREATE TABLE Favorites (
+CREATE TABLE favorites (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT,
   trip_id INT,
@@ -78,7 +78,7 @@ CREATE TABLE Favorites (
 );
 
 -- ContactMessages table
-CREATE TABLE ContactMessages (
+CREATE TABLE contactmessages (
   id INT PRIMARY KEY AUTO_INCREMENT,
   email VARCHAR(255),
   contactmessage_subject VARCHAR(255),
