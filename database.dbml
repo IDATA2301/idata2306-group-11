@@ -11,7 +11,7 @@ Table destinations {
   city varchar
   country varchar
   image_url varchar
-  destination_description text
+  image_alt text
 }
 
 Table flights {
@@ -31,10 +31,11 @@ Table accommodations {
   hotel_city varchar
   hotel_location varchar
   amenities text
+  nights int
 }
 
 Table trips {
-  id int [pk, increment]
+  id int [pk]
   title varchar
   trip_description text
   start_date date
