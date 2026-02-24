@@ -16,9 +16,9 @@ public class Flight {
 
   String airline;
   String departure_city;
-  String arrival_city;
+  String destination_city;
   String departure_airport;
-  String arrival_airport;
+  String destination_airport;
   String flight_duration;
 
   public int getId() {
@@ -45,12 +45,12 @@ public class Flight {
     this.departure_city = departure_city;
   }
 
-  public String getArrival_city() {
-    return arrival_city;
+  public String getDestination_city() {
+    return destination_city;
   }
 
-  public void setArrival_city(String arrival_city) {
-    this.arrival_city = arrival_city;
+  public void setDestination_city(String arrival_city) {
+    this.destination_city = arrival_city;
   }
 
   public String getDeparture_airport() {
@@ -61,12 +61,12 @@ public class Flight {
     this.departure_airport = departure_airport;
   }
 
-  public String getArrival_airport() {
-    return arrival_airport;
+  public String getDestination_airport() {
+    return destination_airport;
   }
 
   public void setArrival_airport(String arrival_airport) {
-    this.arrival_airport = arrival_airport;
+    this.destination_airport = arrival_airport;
   }
 
   public String getFlight_duration() {

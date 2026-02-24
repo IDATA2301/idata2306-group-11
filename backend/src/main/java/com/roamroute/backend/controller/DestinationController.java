@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/api/destinations")
 public class DestinationController {
 
-    private final DestinationRepository destinationRepository;
+  private final DestinationRepository destinationRepository;
 
-    public DestinationController(DestinationRepository destinationRepository) {
-        this.destinationRepository = destinationRepository;
-    }
+  public DestinationController(DestinationRepository destinationRepository) {
+		this.destinationRepository = destinationRepository;
+  }
 
-    @GetMapping
-    public List<Destination> getAllDestinations() {
-        return destinationRepository.findAll();
-    }
+  @GetMapping
+  public List<Destination> getAllDestinations() {
+    return destinationRepository.findAll();
+  }
     
 }
