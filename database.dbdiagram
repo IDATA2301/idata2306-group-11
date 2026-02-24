@@ -1,0 +1,150 @@
+{
+  "version": "1.0.0",
+  "darkMode": true,
+  "gridEnabling": false,
+  "detailLevel": "All",
+  "tablePositions": [
+    {
+      "name": "users",
+      "schemaName": "public",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "name": "destinations",
+      "schemaName": "public",
+      "x": 264,
+      "y": 0
+    },
+    {
+      "name": "flights",
+      "schemaName": "public",
+      "x": 572.0668151689027,
+      "y": -28.658686026144153
+    },
+    {
+      "name": "accommodations",
+      "schemaName": "public",
+      "x": 856,
+      "y": 0
+    },
+    {
+      "name": "trips",
+      "schemaName": "public",
+      "x": 0,
+      "y": 240
+    },
+    {
+      "name": "tripprices",
+      "schemaName": "public",
+      "x": 264,
+      "y": 240
+    },
+    {
+      "name": "favorites",
+      "schemaName": "public",
+      "x": 560,
+      "y": 304
+    },
+    {
+      "name": "contactmessages",
+      "schemaName": "public",
+      "x": 856,
+      "y": 272
+    }
+  ],
+  "tableGroupCollapseStates": [],
+  "stickyNoteLayouts": [],
+  "referencePaths": [
+    {
+      "firstFieldNames": [
+        "destination_id"
+      ],
+      "firstTableName": "trips",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "destinations",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "flight_id"
+      ],
+      "firstTableName": "trips",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "flights",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "accommodation_id"
+      ],
+      "firstTableName": "trips",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "accommodations",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "trip_id"
+      ],
+      "firstTableName": "tripprices",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "trips",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "favorites",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "users",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "trip_id"
+      ],
+      "firstTableName": "favorites",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "trips",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    }
+  ]
+}

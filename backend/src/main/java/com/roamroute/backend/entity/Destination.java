@@ -15,7 +15,7 @@ public class Destination {
   String city;
   String country;
   String image_url;
-  String destination_description;
+  String image_alt;
 
   public int getId() {
     return id;
@@ -49,12 +49,12 @@ public class Destination {
     this.image_url = image_url;
   }
 
-  public String getDestination_description() {
-    return destination_description;
+  public String getImage_alt() {
+    return image_alt;
   }
 
-  public void setDestination_description(String destination_description) {
-    this.destination_description = destination_description;
+  public void setImage_alt(String image_alt) {
+    this.image_alt = image_alt;
   }
 
 }
