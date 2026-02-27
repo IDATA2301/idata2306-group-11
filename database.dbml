@@ -42,16 +42,16 @@ Table trips {
   end_date date
   duration_days int
   keywords text
-  destination_id int
-  flight_id int
-  accommodation_id int
+  destination_id int [unique]
+  flight_id int [unique]
+  accommodation_id int [unique]
 }
 
 Table tripprices {
   id int [pk, increment]
   trip_id int
   tripprice_provider varchar
-  price decimal
+  price varchar
   tripprice_type varchar
 }
 
@@ -69,9 +69,9 @@ Table contactmessages {
   created_at datetime
 }
 
-Ref: trips.destination_id > destinations.id
-Ref: trips.flight_id > flights.id
-Ref: trips.accommodation_id > accommodations.id
+Ref: trips.destination_id - destinations.id
+Ref: trips.flight_id - flights.id
+Ref: trips.accommodation_id - accommodations.id
 
 Ref: tripprices.trip_id > trips.id
 

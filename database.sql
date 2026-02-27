@@ -63,7 +63,7 @@ CREATE TABLE tripprices (
   id INT PRIMARY KEY AUTO_INCREMENT,
   trip_id INT,
   tripprice_provider VARCHAR(255),
-  price DECIMAL(10, 2),
+  price VARCHAR(50),
   tripprice_type VARCHAR(50),
   FOREIGN KEY (trip_id) REFERENCES Trips(id)
 );

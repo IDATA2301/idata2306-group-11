@@ -19,13 +19,13 @@
     {
       "name": "flights",
       "schemaName": "public",
-      "x": 572.0668151689027,
-      "y": -28.658686026144153
+      "x": 544,
+      "y": 0
     },
     {
       "name": "accommodations",
       "schemaName": "public",
-      "x": 856,
+      "x": 832,
       "y": 0
     },
     {
@@ -38,19 +38,19 @@
       "name": "tripprices",
       "schemaName": "public",
       "x": 264,
-      "y": 240
+      "y": 232.78014229892665
     },
     {
       "name": "favorites",
       "schemaName": "public",
-      "x": 560,
+      "x": 544,
       "y": 304
     },
     {
       "name": "contactmessages",
       "schemaName": "public",
-      "x": 856,
-      "y": 272
+      "x": 705.6524902312179,
+      "y": 282.3404268967803
     }
   ],
   "tableGroupCollapseStates": [],
