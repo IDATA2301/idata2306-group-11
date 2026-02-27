@@ -5,7 +5,7 @@ import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,15 +25,15 @@ public class Trip {
 
 	private String keywords;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "destination_id")
 	private Destination destination;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "flight_id")
 	private Flight flight;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "accommodation_id")
 	private Accommodation accommodation;
 

@@ -8,6 +8,8 @@ import com.roamroute.backend.entity.User;
 import com.roamroute.backend.repository.UserRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 
 @RestController
