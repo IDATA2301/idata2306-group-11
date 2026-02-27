@@ -4,6 +4,8 @@ Table users {
   email varchar
   user_password varchar
   user_role varchar
+  user_address varchar
+  user_country varchar
 }
 
 Table destinations {
@@ -42,31 +44,38 @@ Table trips {
   end_date date
   duration_days int
   keywords text
-  destination_id int [unique]
-  flight_id int [unique]
-  accommodation_id int [unique]
+  destination_id int 
+  flight_id int 
+  accommodation_id int 
 }
 
 Table tripprices {
   id int [pk, increment]
   trip_id int
   tripprice_provider varchar
-  price varchar
+  price decimal(10, 2)
   tripprice_type varchar
 }
 
 Table favorites {
   id int [pk, increment]
   user_id int
-  trip_id int
+  selectedpackage_id int
 }
 
 Table contactmessages {
   id int [pk, increment]
-  email varchar
+  user_id int
   contactmessage_subject varchar
   contactmessage_message text
   created_at datetime
+}
+
+Table selectedpackages {
+  id int [pk, increment]
+  trip_id int
+  flight_tripprice_id int
+  hotel_tripprice_id int
 }
 
 Ref: trips.destination_id - destinations.id
@@ -76,9 +85,13 @@ Ref: trips.accommodation_id - accommodations.id
 Ref: tripprices.trip_id > trips.id
 
 Ref: favorites.user_id > users.id
-Ref: favorites.trip_id > trips.id
+Ref: favorites.selectedpackage_id > selectedpackages.id
 
-// Flights have diffeerent airlines? 
-// How to show that in the website?
+Ref: contactmessages.user_id > users.id
+
+Ref: selectedpackages.trip_id > trips.id
+Ref: selectedpackages.flight_tripprice_id > tripprices.id
+Ref: selectedpackages.hotel_tripprice_id > tripprices.id
+
 
 

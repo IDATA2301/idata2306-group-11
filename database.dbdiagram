@@ -32,13 +32,13 @@
       "name": "trips",
       "schemaName": "public",
       "x": 0,
-      "y": 240
+      "y": 304
     },
     {
       "name": "tripprices",
       "schemaName": "public",
       "x": 264,
-      "y": 232.78014229892665
+      "y": 240
     },
     {
       "name": "favorites",
@@ -49,8 +49,14 @@
     {
       "name": "contactmessages",
       "schemaName": "public",
-      "x": 705.6524902312179,
-      "y": 282.3404268967803
+      "x": 832,
+      "y": 304
+    },
+    {
+      "name": "selectedpackages",
+      "schemaName": "public",
+      "x": 0,
+      "y": 706
     }
   ],
   "tableGroupCollapseStates": [],
@@ -62,7 +68,7 @@
       ],
       "firstTableName": "trips",
       "firstSchemaName": "public",
-      "firstRelation": "*",
+      "firstRelation": "1",
       "secondFieldNames": [
         "id"
       ],
@@ -77,7 +83,7 @@
       ],
       "firstTableName": "trips",
       "firstSchemaName": "public",
-      "firstRelation": "*",
+      "firstRelation": "1",
       "secondFieldNames": [
         "id"
       ],
@@ -92,7 +98,7 @@
       ],
       "firstTableName": "trips",
       "firstSchemaName": "public",
-      "firstRelation": "*",
+      "firstRelation": "1",
       "secondFieldNames": [
         "id"
       ],
@@ -133,7 +139,7 @@
     },
     {
       "firstFieldNames": [
-        "trip_id"
+        "selectedpackage_id"
       ],
       "firstTableName": "favorites",
       "firstSchemaName": "public",
@@ -141,7 +147,67 @@
       "secondFieldNames": [
         "id"
       ],
+      "secondTableName": "selectedpackages",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "contactmessages",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "users",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "trip_id"
+      ],
+      "firstTableName": "selectedpackages",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
       "secondTableName": "trips",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "flight_tripprice_id"
+      ],
+      "firstTableName": "selectedpackages",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "tripprices",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "hotel_tripprice_id"
+      ],
+      "firstTableName": "selectedpackages",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "tripprices",
       "secondSchemaName": "public",
       "secondRelation": "1",
       "checkPoints": []

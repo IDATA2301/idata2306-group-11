@@ -1,6 +1,11 @@
 package com.roamroute.backend.entity;
 
+import java.math.BigDecimal;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -11,13 +16,16 @@ public class TripPrice {
 
   @Id
   @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-  int id;
+  private int id;
 
-  String tripprice_provider;
+  private String tripprice_provider;
 
-  String price;
+  @Column(precision = 10, scale = 2)
+  private BigDecimal price;
 
-  String tripprice_type;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tripprice_type")
+  private TripPriceType tripprice_type;
 
   public int getId() {
     return id;
@@ -35,19 +43,19 @@ public class TripPrice {
     this.tripprice_provider = tripprice_provider;
   }
 
-  public String getPrice() {
+  public BigDecimal getPrice() {
     return price;
   }
 
-  public void setPrice(String price) {
+  public void setPrice(BigDecimal price) {
     this.price = price;
   }
 
-  public String getTripprice_type() {
+  public TripPriceType getTripprice_type() {
     return tripprice_type;
   }
 
-  public void setTripprice_type(String tripprice_type) {
+  public void setTripprice_type(TripPriceType tripprice_type) {
     this.tripprice_type = tripprice_type;
   }
 }

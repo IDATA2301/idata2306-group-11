@@ -12,14 +12,14 @@ public class Flight {
 
   @Id
   @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-  int id;
+  private int id;
 
-  String airline;
-  String departure_city;
-  String destination_city;
-  String departure_airport;
-  String destination_airport;
-  String flight_duration;
+  private String airline;
+  private String departure_city;
+  private String destination_city;
+  private String departure_airport;
+  private String destination_airport;
+  private String flight_duration;
 
   public int getId() {
     return id;
