@@ -21,6 +21,10 @@ public class User {
 
   private String user_role;
 
+  private String user_address;
+
+  private String user_country;
+
   public int getId() {
     return id;
   }
@@ -59,6 +63,22 @@ public class User {
 
   public void setUser_role(String user_role) {
     this.user_role = user_role;
+  }
+
+  public String getUser_address() {
+    return user_address;
+  }
+
+  public void setUser_address(String user_address) {
+    this.user_address = user_address;
+  }
+
+  public String getUser_country() {
+    return user_country;
+  }
+
+  public void setUser_country(String user_country) {
+    this.user_country = user_country;
   }
 
 }

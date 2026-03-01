@@ -11,12 +11,12 @@ import jakarta.persistence.Table;
 public class Destination {
   @Id
   @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-  int id;
+  private int id;
 
-  String city;
-  String country;
-  String image_url;
-  String image_alt;
+  private String city;
+  private String country;
+  private String image_url;
+  private String image_alt;
 
   public int getId() {
     return id;

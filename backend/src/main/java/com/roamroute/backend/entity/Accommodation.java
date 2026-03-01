@@ -11,14 +11,14 @@ public class Accommodation {
 
 	@Id
 	@GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-	int id;
+	private int id;
 
-	String hotel_name;
-	String hotel_type;
-	String hotel_city;
-	String hotel_location;
-	String amenities;
-	int nights;
+	private String hotel_name;
+	private String hotel_type;
+	private String hotel_city;
+	private String hotel_location;
+	private String amenities;
+	private int nights;
 
 	public int getId() {
 		return id;
