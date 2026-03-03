@@ -1,6 +1,6 @@
 -- Create database
-CREATE DATABASE IF NOT EXISTS idata2306_travel;
-USE idata2306_travel;
+CREATE DATABASE IF NOT EXISTS roamroute_db;
+USE roamroute_db;
 
 -- Users table
 CREATE TABLE users (
@@ -99,4 +99,42 @@ CREATE TABLE contactmessages (
   contactmessage_message TEXT,
   created_at DATETIME,
   FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- Carts table
+CREATE TABLE carts (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  created_at DATETIME,
+  status VARCHAR(50),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- CartItems table
+CREATE TABLE cart_items (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  cart_id INT,
+  selectedpackage_id INT,
+  FOREIGN KEY (cart_id) REFERENCES carts(id),
+  FOREIGN KEY (selectedpackage_id) REFERENCES selectedpackages(id)
+);
+
+-- Orders table
+CREATE TABLE orders (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  order_date DATETIME,
+  total_price DECIMAL(10, 2),
+  status VARCHAR(50),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- OrderItems table
+CREATE TABLE order_items (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  order_id INT NOT NULL,
+  selectedpackage_id INT NOT NULL,
+  price_at_purchase DECIMAL(10, 2),
+  FOREIGN KEY (order_id) REFERENCES orders(id),
+  FOREIGN KEY (selectedpackage_id) REFERENCES selectedpackages(id)
 );
