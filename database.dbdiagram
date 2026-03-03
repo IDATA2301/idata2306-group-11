@@ -13,19 +13,19 @@
     {
       "name": "destinations",
       "schemaName": "public",
-      "x": 264,
+      "x": 320,
       "y": 0
     },
     {
       "name": "flights",
       "schemaName": "public",
-      "x": 544,
+      "x": 600,
       "y": 0
     },
     {
       "name": "accommodations",
       "schemaName": "public",
-      "x": 832,
+      "x": 896,
       "y": 0
     },
     {
@@ -37,26 +37,50 @@
     {
       "name": "tripprices",
       "schemaName": "public",
-      "x": 264,
+      "x": 320,
       "y": 240
     },
     {
       "name": "favorites",
       "schemaName": "public",
-      "x": 544,
+      "x": 600,
       "y": 304
     },
     {
       "name": "contactmessages",
       "schemaName": "public",
-      "x": 832,
+      "x": 896,
       "y": 304
     },
     {
       "name": "selectedpackages",
       "schemaName": "public",
       "x": 0,
-      "y": 706
+      "y": 712
+    },
+    {
+      "name": "carts",
+      "schemaName": "public",
+      "x": 320,
+      "y": 488
+    },
+    {
+      "name": "cart_items",
+      "schemaName": "public",
+      "x": 600,
+      "y": 488
+    },
+    {
+      "name": "orders",
+      "schemaName": "public",
+      "x": 896,
+      "y": 552
+    },
+    {
+      "name": "order_items",
+      "schemaName": "public",
+      "x": 0,
+      "y": 920
     }
   ],
   "tableGroupCollapseStates": [],
@@ -208,6 +232,111 @@
         "id"
       ],
       "secondTableName": "tripprices",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "carts",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "users",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "cart_item"
+      ],
+      "firstTableName": "carts",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "cart_items",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "cart_id"
+      ],
+      "firstTableName": "cart_items",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "carts",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "selectedpackage_id"
+      ],
+      "firstTableName": "cart_items",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "selectedpackages",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "orders",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "users",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "order_id"
+      ],
+      "firstTableName": "order_items",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "orders",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "selectedpackage_id"
+      ],
+      "firstTableName": "order_items",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "selectedpackages",
       "secondSchemaName": "public",
       "secondRelation": "1",
       "checkPoints": []
