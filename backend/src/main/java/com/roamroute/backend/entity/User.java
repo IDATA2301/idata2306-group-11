@@ -3,6 +3,7 @@ package com.roamroute.backend.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +16,7 @@ public class User {
 
   private String user_name;
 
+  @Column(unique = true)
   private String email;
 
   private String user_password;

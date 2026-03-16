@@ -6,7 +6,7 @@ USE roamroute_db;
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_name VARCHAR(255),
-  email VARCHAR(255),
+  email VARCHAR(255) UNIQUE,
   user_password VARCHAR(255),
   user_role VARCHAR(50),
   user_address VARCHAR(255),
