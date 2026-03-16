@@ -8,7 +8,7 @@ CREATE TABLE users (
   user_name VARCHAR(255),
   email VARCHAR(255) UNIQUE,
   user_password VARCHAR(255),
-  user_role VARCHAR(50),
+  user_role ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
   user_address VARCHAR(255),
   user_country VARCHAR(50)
 );
