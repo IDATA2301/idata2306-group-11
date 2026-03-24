@@ -56,6 +56,7 @@ CREATE TABLE trips (
   destination_id INT,
   flight_id INT,
   accommodation_id INT,
+  image_url VARCHAR(500),
   FOREIGN KEY (destination_id) REFERENCES destinations(id),
   FOREIGN KEY (flight_id) REFERENCES flights(id),
   FOREIGN KEY (accommodation_id) REFERENCES accommodations(id)

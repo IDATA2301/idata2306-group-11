@@ -31,4 +31,9 @@ public class TripController {
 	public Trip getTripById(@PathVariable int id) {
 		return tripRepository.findById(id).orElseThrow();
 	}
+
+	@GetMapping("/home")
+	public List<Trip> getHomeTrips() {
+		return tripRepository.findTop3ByOrderByIdAsc();
+	}
 }

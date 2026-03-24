@@ -37,6 +37,8 @@ public class Trip {
 	@JoinColumn(name = "accommodation_id")
 	private Accommodation accommodation;
 
+	private String image_url;
+
 	public int getId() {
 		return id;
 	}
@@ -107,6 +109,14 @@ public class Trip {
 
 	public void setAccomodation(Accommodation accomodation) {
 		this.accommodation = accomodation;
+	}
+
+	public String getImage_url() {
+		return image_url;
+	}
+
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
 	}
 
 }

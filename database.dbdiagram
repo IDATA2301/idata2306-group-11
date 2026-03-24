@@ -253,21 +253,6 @@
     },
     {
       "firstFieldNames": [
-        "cart_item"
-      ],
-      "firstTableName": "carts",
-      "firstSchemaName": "public",
-      "firstRelation": "*",
-      "secondFieldNames": [
-        "id"
-      ],
-      "secondTableName": "cart_items",
-      "secondSchemaName": "public",
-      "secondRelation": "1",
-      "checkPoints": []
-    },
-    {
-      "firstFieldNames": [
         "cart_id"
       ],
       "firstTableName": "cart_items",
