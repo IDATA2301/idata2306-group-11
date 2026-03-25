@@ -46,7 +46,8 @@ Table trips {
   keywords text
   destination_id int 
   flight_id int 
-  accommodation_id int 
+  accommodation_id int
+  image_url varchar 
 }
 
 Table tripprices {
