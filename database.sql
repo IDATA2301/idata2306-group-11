@@ -55,7 +55,7 @@ CREATE TABLE trips (
   keywords TEXT,
   destination_id INT,
   image_url VARCHAR(500),
-  FOREIGN KEY (destination_id) REFERENCES destinations(id),
+  FOREIGN KEY (destination_id) REFERENCES destinations(id)
 );
 
 -- TripPrices table
@@ -67,7 +67,7 @@ CREATE TABLE tripprices (
   tripprice_type VARCHAR(50),
   flight_id INT,
   accommodation_id INT,
-  FOREIGN KEY (trip_id) REFERENCES trips(id)
+  FOREIGN KEY (trip_id) REFERENCES trips(id),
   FOREIGN KEY (flight_id) REFERENCES flights(id),
   FOREIGN KEY (accommodation_id) REFERENCES accommodations(id)
 );
