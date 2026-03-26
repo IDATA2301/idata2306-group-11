@@ -29,14 +29,6 @@ public class Trip {
 	@JoinColumn(name = "destination_id")
 	private Destination destination;
 
-	@OneToOne
-	@JoinColumn(name = "flight_id")
-	private Flight flight;
-
-	@OneToOne
-	@JoinColumn(name = "accommodation_id")
-	private Accommodation accommodation;
-
 	private String image_url;
 
 	public int getId() {
@@ -93,22 +85,6 @@ public class Trip {
 
 	public void setDestination(Destination destination) {
 		this.destination = destination;
-	}
-
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
-
-	public Accommodation getAccomodation() {
-		return accommodation;
-	}
-
-	public void setAccomodation(Accommodation accomodation) {
-		this.accommodation = accomodation;
 	}
 
 	public String getImage_url() {

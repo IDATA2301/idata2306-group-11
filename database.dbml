@@ -45,8 +45,6 @@ Table trips {
   duration_days int
   keywords text
   destination_id int 
-  flight_id int 
-  accommodation_id int
   image_url varchar 
 }
 
@@ -56,6 +54,8 @@ Table tripprices {
   tripprice_provider varchar
   price decimal(10, 2)
   tripprice_type varchar
+  flight_id int
+  accommodation_id int
 }
 
 Table favorites {
@@ -109,10 +109,11 @@ Table order_items {
 }
 
 Ref: trips.destination_id - destinations.id
-Ref: trips.flight_id - flights.id
-Ref: trips.accommodation_id - accommodations.id
 
 Ref: tripprices.trip_id > trips.id
+Ref: tripprices.flight_id > flights.id
+Ref: tripprices.accommodation_id > accommodations.id
+
 
 Ref: favorites.user_id > users.id
 Ref: favorites.selectedpackage_id > selectedpackages.id

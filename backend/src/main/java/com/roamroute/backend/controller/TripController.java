@@ -8,32 +8,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.roamroute.backend.dto.TripHomeDTO;
 import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.repository.TripRepository;
+import com.roamroute.backend.service.TripService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/trips")
+@CrossOrigin
 public class TripController {
-  
-	private final TripRepository tripRepository;
 
-	public TripController(TripRepository tripRepository) {
-		this.tripRepository = tripRepository;
-	}
+    private final TripService tripService;
 
-	@GetMapping
-	public List<Trip> getAllTrips() {
-		return tripRepository.findAll();
-	}
+    public TripController(TripService tripService) {
+        this.tripService = tripService;
+    }
 
-	@GetMapping("/{id}")
-	public Trip getTripById(@PathVariable int id) {
-		return tripRepository.findById(id).orElseThrow();
-	}
-
-	@GetMapping("/home")
-	public List<Trip> getHomeTrips() {
-		return tripRepository.findTop3ByOrderByIdAsc();
-	}
+    @GetMapping("/home")
+    public List<TripHomeDTO> getHomeTrips() {
+        return tripService.getHomeTrips();
+    }
 }
