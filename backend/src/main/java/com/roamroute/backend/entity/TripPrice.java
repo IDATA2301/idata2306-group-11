@@ -2,12 +2,16 @@ package com.roamroute.backend.entity;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +22,11 @@ public class TripPrice {
   @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
   private int id;
 
+  @ManyToOne
+  @JoinColumn(name = "trip_id")
+  @JsonIgnoreProperties({"tripPrices"})
+  private Trip trip;
+
   private String tripprice_provider;
 
   @Column(precision = 10, scale = 2)
@@ -26,6 +35,16 @@ public class TripPrice {
   @Enumerated(EnumType.STRING)
   @Column(name = "tripprice_type")
   private TripPriceType tripprice_type;
+
+  @ManyToOne
+  @JoinColumn(name = "flight_id")
+  @JsonIgnoreProperties({"tripPrices"})
+  private Flight flight;
+
+  @ManyToOne
+  @JoinColumn(name = "accommodation_id")
+  @JsonIgnoreProperties({"tripPrices"})
+  private Accommodation accommodation;
 
   public int getId() {
     return id;
