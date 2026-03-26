@@ -14,6 +14,7 @@ public class User {
   @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
   private int id;
 
+  @Column(name = "user_name", unique = true, nullable = false, length = 20)
   private String user_name;
 
   @Column(unique = true)
