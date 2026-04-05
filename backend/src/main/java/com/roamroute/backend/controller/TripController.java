@@ -3,10 +3,13 @@ package com.roamroute.backend.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.roamroute.backend.dto.TripDetailsDTO;
 import com.roamroute.backend.dto.TripHomeDTO;
+import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.service.TripService;
 
 @RestController
@@ -22,5 +25,10 @@ public class TripController {
     @GetMapping("/home")
     public List<TripHomeDTO> getHomeTrips() {
         return tripService.getHomeTrips();
+    }
+
+    @GetMapping("/{id}")
+    public TripDetailsDTO getTripById(@PathVariable int id) {
+        return tripService.getTripDetails(id);
     }
 }
