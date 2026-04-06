@@ -77,4 +77,28 @@ public class TripPrice {
   public void setTripprice_type(TripPriceType tripprice_type) {
     this.tripprice_type = tripprice_type;
   }
+
+  public Trip getTrip() {
+    return trip;
+  }
+
+  public void setTrip(Trip trip) {
+    this.trip = trip;
+  }
+
+  public Flight getFlight() {
+    return flight;
+  }
+
+  public void setFlight(Flight flight) {
+    this.flight = flight;
+  }
+
+  public Accommodation getAccommodation() {
+    return accommodation;
+  }
+
+  public void setAccommodation(Accommodation accommodation) {
+    this.accommodation = accommodation;
+  }
 }

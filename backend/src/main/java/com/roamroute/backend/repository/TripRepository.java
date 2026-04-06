@@ -10,4 +10,5 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 
   List<Trip> findTop3ByOrderByIdAsc();
 
+  Trip findById(int id);
 }
