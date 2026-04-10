@@ -80,6 +80,39 @@ public class TripService {
             .sorted(Comparator.comparingDouble(TripPriceDTO::getPrice))
             .toList();
 
+        var departureAirport = tripPriceRepository
+            .findByTrip_IdAndFlightIsNotNull(id)
+            .stream()
+            .findFirst()
+            .map(tp -> tp.getFlight().getDeparture_airport())
+            .orElse("N/A");
+
+        var arrivalAirport = tripPriceRepository
+            .findByTrip_IdAndFlightIsNotNull(id)
+            .stream()
+            .findFirst()
+            .map(tp -> tp.getFlight().getDestination_airport())
+            .orElse("N/A");
+
+        List<String> keywords = List.of(trip.getKeywords().split(",")).stream()
+            .map(String::trim)
+            .toList();
+
+        var accommodation = tripPriceRepository
+            .findByTrip_IdAndAccommodationIsNotNull(id)
+            .stream()
+            .findFirst()
+            .map(tp -> tp.getAccommodation())
+            .orElse(null);
+
+        String hotelName = accommodation != null ? accommodation.getHotel_name() : "N/A";
+        String hotelType = accommodation != null ? accommodation.getHotel_type() : "N/A";
+        String hotelLocation = accommodation != null ? accommodation.getHotel_location() : "N/A";
+        String amenities = accommodation != null ? accommodation.getAmenities() : "N/A";
+        int nights = accommodation != null ? accommodation.getNights() : 0;
+        double latitude = accommodation != null ? accommodation.getLatitude() : 0;
+        double longitude = accommodation != null ? accommodation.getLongitude() : 0;
+
         return new TripDetailsDTO(  
             trip.getId(),
             trip.getTitle(),
@@ -91,7 +124,17 @@ public class TripService {
             trip.getEnd_date().toString(),
             flightDuration,
             flightOptions,
-            hotelOptions
+            hotelOptions,
+            departureAirport,
+            arrivalAirport,
+            keywords,
+            hotelName,
+            hotelType,
+            hotelLocation,
+            amenities,
+            nights,
+            latitude,
+            longitude
         );
     }
 }

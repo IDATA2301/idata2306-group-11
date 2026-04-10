@@ -34,6 +34,8 @@ Table accommodations {
   hotel_location varchar
   amenities text
   nights int
+  latitude decimal(10, 6)
+  longitude decimal(10, 6)
 }
 
 Table trips {
