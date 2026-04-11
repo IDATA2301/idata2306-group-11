@@ -15,12 +15,25 @@ public class TripDetailsDTO {
     private String flightDuration;
     private List<TripPriceDTO> flightOptions;
     private List<TripPriceDTO> hotelOptions;
+    private String departureAirport;
+    private String arrivalAirport;
+    private List<String> keywords;
+    private String hotelName;
+    private String hotelType;
+    private String hotelLocation;
+    private String amenities;
+    private int nights;
+    private double latitude;
+    private double longitude;
 
 
     public TripDetailsDTO(int id, String title, String description,
                           String imageUrl, String city, String country,
                           String startDate, String endDate,
-                          String flightDuration, List<TripPriceDTO> flightOptions, List<TripPriceDTO> hotelOptions) {
+                          String flightDuration, List<TripPriceDTO> flightOptions, List<TripPriceDTO> hotelOptions,
+                          String departureAirport, String arrivalAirport, List<String> keywords,
+                          String hotelName, String hotelType, String hotelLocation, String amenities, int nights,
+                          double latitude, double longitude) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -32,6 +45,16 @@ public class TripDetailsDTO {
         this.flightDuration = flightDuration;
         this.flightOptions = flightOptions;
         this.hotelOptions = hotelOptions;
+        this.departureAirport = departureAirport;
+        this.arrivalAirport = arrivalAirport;
+        this.keywords = keywords;
+        this.hotelName = hotelName;
+        this.hotelType = hotelType;
+        this.hotelLocation = hotelLocation;
+        this.amenities = amenities;
+        this.nights = nights;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -78,4 +101,43 @@ public class TripDetailsDTO {
         return hotelOptions;
     }
 
+    public String getDepartureAirport() {
+        return departureAirport;
+    }
+
+    public String getArrivalAirport() {
+        return arrivalAirport;
+    }
+
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public String getHotelType() {
+        return hotelType;
+    }
+
+    public String getHotelLocation() {
+        return hotelLocation;
+    }
+
+    public String getAmenities() {
+        return amenities;
+    }
+
+    public int getNights() {
+        return nights;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 }

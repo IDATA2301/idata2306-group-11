@@ -19,6 +19,8 @@ public class Accommodation {
 	private String hotel_location;
 	private String amenities;
 	private int nights;
+	private double latitude;
+	private double longitude;
 
 	public int getId() {
 		return id;
@@ -74,5 +76,21 @@ public class Accommodation {
 
 	public void setNights(int nights) {
 		this.nights = nights;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(long latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(long longitude) {
+		this.longitude = longitude;
 	}
 }

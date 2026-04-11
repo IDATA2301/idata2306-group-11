@@ -42,6 +42,8 @@ CREATE TABLE accommodations (
   hotel_location VARCHAR(255),
   amenities TEXT,
   nights INT
+  latitude DOUBLE(10, 6),
+  longitude DOUBLE(10, 6)
 );
 
 -- Trips table
@@ -175,13 +177,13 @@ VALUES
 INSERT INTO accommodations (hotel_name, hotel_type, hotel_city, hotel_location, amenities, nights)
 VALUES
   ('Hotel Rialto', '3 star, Family-friendly', 'Barcelona', 'Barcelona city center',
-   'Breakfast included, Wi-Fi, Family rooms', 7),
+   'Breakfast included, Wi-Fi, Family rooms', 7, 41.38225, 2.17774),
   ('Hotel Piazza Bellini', '3 star, Boutique, Centrally located', 'Naples', 'Naples Historic Center', 
-   'Breakfast included, Wi-Fi, Air Conditioning', 7),
+   'Breakfast included, Wi-Fi, Air Conditioning', 7, 40.87423, 14.29892),
   ('Hôtel des Arts Montmartre', '3 star, Boutique', 'Paris', 'Montmartre, Paris',
-  'Free Wi-Fi, Breakfast available, Central location, Air conditioning', 8),
+  'Free Wi-Fi, Breakfast available, Central location, Air conditioning', 8, 48.88639, 14.298920),
   ('Hotel Mystays Premier', '4 star', 'Tokyo', 'Shinjuku',
-  'Breakfast, Wi-Fi, Airport shuttle', 10);
+  'Breakfast, Wi-Fi, Airport shuttle', 10, 35.69505, 139.69727);
   
 
 
