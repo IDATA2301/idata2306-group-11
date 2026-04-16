@@ -1,5 +1,6 @@
--- Create database
-CREATE DATABASE IF NOT EXISTS roamroute_db;
+-- Reset database so this script can be rerun safely
+DROP DATABASE IF EXISTS roamroute_db;
+CREATE DATABASE roamroute_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE roamroute_db;
 
 -- Users table
@@ -41,7 +42,7 @@ CREATE TABLE accommodations (
   hotel_city VARCHAR(255),
   hotel_location VARCHAR(255),
   amenities TEXT,
-  nights INT
+  nights INT,
   latitude DOUBLE(10, 6),
   longitude DOUBLE(10, 6)
 );
@@ -142,8 +143,7 @@ CREATE TABLE order_items (
   FOREIGN KEY (selectedpackage_id) REFERENCES selectedpackages(id)
 );
 
-## INSERT STATEMENTS
-
+-- Seed data
 INSERT INTO destinations (city, country, image_url, image_alt)
 VALUES
   ('Barcelona', 'Spain', 'barcelona.jpg', 'Beautiful view of Barcelona'),
@@ -151,22 +151,10 @@ VALUES
   ('Paris', 'France', 'parisDest.jpg', 'Iconic view of Paris'),
   ('Tokyo', 'Japan', 'tokyoDest.png', 'Vibrant cityscape of Tokyo');
 
-INSERT INTO trips (id, title, trip_description, start_date, end_date, duration_days, keywords, destination_id, image_url)
-VALUES
-  (1023, 'Warm winter trip Ålesund -> Barcelona', 'A family-friendly economy trip from Ålesund to Barcelona, ideal for a warm winter escape.',
-   '2026-02-13', '2026-02-20', 7, 'Economy, Family, City Break, Winter Sun', 1, 'barcelonaTrip.jpg'),
-  (2047, 'Spring Getaway Oslo -> Naples', 'A relaxing and budget-friendly cultural trip from Oslo to Naples, perfect for travelers seeking warmer weather, Italian cuisine, and historic attractions.',
-   '2026-04-10', '2026-04-17', 7, 'Economy, Couples, City Break, Spring Sun', 2, 'naplesTrip.jpg'),
-  (3198, 'Romantic Spring Escape Trondheim → Paris', 'A relaxed and romantic spring getaway from Trondheim to Paris, perfect for couples seeking culture, food, and scenic strolls along the Seine.',
-   '2026-04-05', '2026-04-12', 8, 'Romance, Culture, Economy, City Experience', 3, 'parisTrip.png'),
-  (2031, 'Spring Explorer Trip Oslo → Tokyo', 'A cultural discovery trip from Oslo to Tokyo, perfect for travelers seeking food, history, and modern city life',
-   '2026-04-02', '2026-04-12', 10, 'Adventure, Culture, Cherry Blosom, Budget-Friendly', 4, 'tokyoTrip.png');
-  
-
 INSERT INTO flights (airline, departure_city, destination_city, departure_airport, destination_airport, flight_duration)
 VALUES
-  ('Vueling', 'Ålesund', 'Barcelona', 'AES', 'BCN', '5-7h'),
-  ('KLM', 'Ålesund', 'Barclona', 'AES', 'BCN', '5-7h'),
+  ('Vueling', 'Alesund', 'Barcelona', 'AES', 'BCN', '5-7h'),
+  ('KLM', 'Alesund', 'Barcelona', 'AES', 'BCN', '5-7h'),
   ('Norwegian', 'Oslo', 'Naples', 'OSL', 'NAP', '3.5-5.5h'),
   ('Lufthansa', 'Oslo', 'Naples', 'OSL', 'NAP', '3.5-5.5h'),
   ('Air France', 'Trondheim', 'Paris', 'TRD', 'CDG', '4-6h'),
@@ -174,39 +162,52 @@ VALUES
   ('ANA', 'Oslo', 'Tokyo', 'OSL', 'HND', '14-17h'),
   ('Qatar Airways', 'Oslo', 'Tokyo', 'OSL', 'HND', '14-17h');
 
-INSERT INTO accommodations (hotel_name, hotel_type, hotel_city, hotel_location, amenities, nights)
+INSERT INTO accommodations
+(hotel_name, hotel_type, hotel_city, hotel_location, amenities, nights, latitude, longitude)
 VALUES
   ('Hotel Rialto', '3 star, Family-friendly', 'Barcelona', 'Barcelona city center',
-   'Breakfast included, Wi-Fi, Family rooms', 7, 41.38225, 2.17774),
-  ('Hotel Piazza Bellini', '3 star, Boutique, Centrally located', 'Naples', 'Naples Historic Center', 
-   'Breakfast included, Wi-Fi, Air Conditioning', 7, 40.87423, 14.29892),
-  ('Hôtel des Arts Montmartre', '3 star, Boutique', 'Paris', 'Montmartre, Paris',
-  'Free Wi-Fi, Breakfast available, Central location, Air conditioning', 8, 48.88639, 14.298920),
+   'Breakfast included, Wi-Fi, Family rooms', 7, 41.382250, 2.177740),
+  ('Hotel Piazza Bellini', '3 star, Boutique, Centrally located', 'Naples', 'Naples Historic Center',
+   'Breakfast included, Wi-Fi, Air Conditioning', 7, 40.874230, 14.298920),
+  ('Hotel des Arts Montmartre', '3 star, Boutique', 'Paris', 'Montmartre, Paris',
+   'Free Wi-Fi, Breakfast available, Central location, Air conditioning', 8, 48.886390, 2.349010),
   ('Hotel Mystays Premier', '4 star', 'Tokyo', 'Shinjuku',
-  'Breakfast, Wi-Fi, Airport shuttle', 10, 35.69505, 139.69727);
-  
+   'Breakfast, Wi-Fi, Airport shuttle', 10, 35.695050, 139.697270);
 
+INSERT INTO trips (id, title, trip_description, start_date, end_date, duration_days, keywords, destination_id, image_url)
+VALUES
+  (1023, 'Warm winter trip Alesund -> Barcelona',
+   'A family-friendly economy trip from Alesund to Barcelona, ideal for a warm winter escape.',
+   '2026-02-13', '2026-02-20', 7, 'Economy, Family, City Break, Winter Sun', 1, 'barcelonaTrip.jpg'),
+  (2047, 'Spring Getaway Oslo -> Naples',
+   'A relaxing and budget-friendly cultural trip from Oslo to Naples, perfect for travelers seeking warmer weather, Italian cuisine, and historic attractions.',
+   '2026-04-10', '2026-04-17', 7, 'Economy, Couples, City Break, Spring Sun', 2, 'naplesTrip.jpg'),
+  (3198, 'Romantic Spring Escape Trondheim -> Paris',
+   'A relaxed and romantic spring getaway from Trondheim to Paris, perfect for couples seeking culture, food, and scenic strolls along the Seine.',
+   '2026-04-05', '2026-04-12', 8, 'Romance, Culture, Economy, City Experience', 3, 'parisTrip.png'),
+  (2031, 'Spring Explorer Trip Oslo -> Tokyo',
+   'A cultural discovery trip from Oslo to Tokyo, perfect for travelers seeking food, history, and modern city life.',
+   '2026-04-02', '2026-04-12', 10, 'Adventure, Culture, Cherry Blossom, Budget-Friendly', 4, 'tokyoTrip.jpg');
 
 INSERT INTO tripprices (trip_id, tripprice_provider, price, tripprice_type, flight_id, accommodation_id)
 VALUES
- (1023, 'Hotels.com', 645.00, 'HOTEL', NULL, 1),
- (1023, 'Booking.com', 620.00, 'HOTEL', NULL, 1),
- (1023, 'SkyScanner', 150.00, 'FLIGHT', 1, NULL),
- (1023, 'Expedia', 175.00, 'FLIGHT', 1, NULL),
- (1023, 'Momondo', 160.00, 'FLIGHT', 2, NULL),
- (2047, 'AirBnB', 540.00, 'HOTEL', NULL, 2),
- (2047, 'GetYourGuide', 565.00, 'HOTEL', NULL, 2),
- (2047, 'TripAdvisor', 210.00, 'FLIGHT', 3, NULL),
- (2047, 'Kiwi', 230.00, 'FLIGHT', 3, NULL),
- (2047, 'Kayak', 215.00, 'FLIGHT', 4, NULL),
- (3198, 'Booking.com', 900.00, 'HOTEL', NULL, 3),
- (3198, 'Agoda', 880.00, 'HOTEL', NULL, 3),
- (3198, 'Google Flights', 250.00, 'FLIGHT', 5, NULL),
- (3198, 'Kayak', 240.00, 'FLIGHT', 5, NULL),
- (3198, 'Kiwi.com', 270.00, 'FLIGHT', 6, NULL),
- (2031, 'Agoda', 1015.00, 'HOTEL', NULL, 4),
- (2031, 'Booking.com', 1050.00, 'HOTEL', NULL, 4),
- (2031, 'SkyScanner', 830.00, 'FLIGHT', 7, NULL),
- (2031, 'Kayak', 860.00, 'FLIGHT', 7, NULL),
- (2031, 'Momondo', 810.00, 'FLIGHT', 8, NULL);
-
+  (1023, 'Hotels.com', 645.00, 'HOTEL', NULL, 1),
+  (1023, 'Booking.com', 620.00, 'HOTEL', NULL, 1),
+  (1023, 'SkyScanner', 150.00, 'FLIGHT', 1, NULL),
+  (1023, 'Expedia', 175.00, 'FLIGHT', 1, NULL),
+  (1023, 'Momondo', 160.00, 'FLIGHT', 2, NULL),
+  (2047, 'AirBnB', 540.00, 'HOTEL', NULL, 2),
+  (2047, 'GetYourGuide', 565.00, 'HOTEL', NULL, 2),
+  (2047, 'TripAdvisor', 210.00, 'FLIGHT', 3, NULL),
+  (2047, 'Kiwi', 230.00, 'FLIGHT', 3, NULL),
+  (2047, 'Kayak', 215.00, 'FLIGHT', 4, NULL),
+  (3198, 'Booking.com', 900.00, 'HOTEL', NULL, 3),
+  (3198, 'Agoda', 880.00, 'HOTEL', NULL, 3),
+  (3198, 'Google Flights', 250.00, 'FLIGHT', 5, NULL),
+  (3198, 'Kayak', 240.00, 'FLIGHT', 5, NULL),
+  (3198, 'Kiwi.com', 270.00, 'FLIGHT', 6, NULL),
+  (2031, 'Agoda', 1015.00, 'HOTEL', NULL, 4),
+  (2031, 'Booking.com', 1050.00, 'HOTEL', NULL, 4),
+  (2031, 'SkyScanner', 830.00, 'FLIGHT', 7, NULL),
+  (2031, 'Kayak', 860.00, 'FLIGHT', 7, NULL),
+  (2031, 'Momondo', 810.00, 'FLIGHT', 8, NULL);

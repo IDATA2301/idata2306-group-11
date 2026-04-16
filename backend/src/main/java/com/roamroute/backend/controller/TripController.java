@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roamroute.backend.dto.TripDetailsDTO;
@@ -20,6 +21,11 @@ public class TripController {
 
     public TripController(TripService tripService) {
         this.tripService = tripService;
+    }
+
+    @GetMapping("/search")
+    public List<Trip> searchTrips(@RequestParam String q) {
+        return tripService.searchTrips(q);
     }
 
     @GetMapping("/home")
