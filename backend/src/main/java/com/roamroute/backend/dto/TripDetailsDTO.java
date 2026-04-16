@@ -26,7 +26,6 @@ public class TripDetailsDTO {
     private double latitude;
     private double longitude;
 
-
     public TripDetailsDTO(int id, String title, String description,
                           String imageUrl, String city, String country,
                           String startDate, String endDate,
