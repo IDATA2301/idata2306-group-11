@@ -1,5 +1,6 @@
 package com.roamroute.backend.dto;
 
+import java.sql.Date;
 
 public class TripHomeDTO {
   private int id;
@@ -8,14 +9,18 @@ public class TripHomeDTO {
   private String city;
   private String country;
   private double lowestPrice;
+  private Date startDate;
+  private Date endDate;
 
-  public TripHomeDTO(int id, String title, String imageUrl, String city, String country, double lowestPrice) {
+  public TripHomeDTO(int id, String title, String imageUrl, String city, String country, double lowestPrice, Date startDate, Date endDate) {
     this.id = id;
     this.title = title;
     this.imageUrl = imageUrl;
     this.city = city;
     this.country = country;
     this.lowestPrice = lowestPrice;
+    this.startDate = startDate;
+    this.endDate = endDate;
   }
 
   public int getId() {
@@ -40,6 +45,14 @@ public class TripHomeDTO {
 
   public double getLowestPrice() {
     return lowestPrice;
+  }
+
+  public Date getStartDate() {
+    return startDate;
+  }
+
+  public Date getEndDate() {
+    return endDate;
   }
 
 
