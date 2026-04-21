@@ -149,7 +149,7 @@ VALUES
   ('Barcelona', 'Spain', 'barcelona.jpg', 'Beautiful view of Barcelona'),
   ('Naples', 'Italy', 'naples.jpg', 'Scenic view of Naples'),
   ('Paris', 'France', 'parisDest.jpg', 'Iconic view of Paris'),
-  ('Tokyo', 'Japan', 'tokyoDest.png', 'Vibrant cityscape of Tokyo');
+  ('Tokyo', 'Japan', 'tokyoDest.jpg', 'Vibrant cityscape of Tokyo');
 
 INSERT INTO flights (airline, departure_city, destination_city, departure_airport, destination_airport, flight_duration)
 VALUES
