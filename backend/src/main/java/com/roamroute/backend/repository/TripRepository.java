@@ -15,4 +15,17 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
   
   Optional<Trip> findById(int id);
 
+  @Query("""
+      SELECT DISTINCT t
+      FROM Trip t
+      JOIN t.destination d
+      WHERE LOWER(COALESCE(t.title, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+         OR LOWER(COALESCE(t.trip_description, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+         OR LOWER(COALESCE(t.keywords, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+         OR LOWER(COALESCE(d.city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+         OR LOWER(COALESCE(d.country, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+      ORDER BY t.start_date ASC
+      """)
+  List<Trip> searchTrips(@Param("query") String query);
+
 }
