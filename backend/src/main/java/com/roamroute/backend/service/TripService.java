@@ -147,4 +147,17 @@ public class TripService {
             longitude
         );
     }
+
+    public List<Trip> searchTrips(String query) {
+        if (query == null) {
+            return List.of();
+        }
+
+        String normalizedQuery = query.trim();
+        if (normalizedQuery.isEmpty()) {
+            return List.of();
+        }
+
+        return tripRepository.searchTrips(normalizedQuery);
+    }
 }
