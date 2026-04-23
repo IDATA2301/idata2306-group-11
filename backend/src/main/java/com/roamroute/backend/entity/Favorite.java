@@ -6,9 +6,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "favorites")
+@Table(name = "favorites", uniqueConstraints = {
+  @UniqueConstraint(columnNames = {"user_id", "trip_id"}, name = "unique_user_favorite")
+})
 public class Favorite {
 
   @Id
@@ -20,8 +23,8 @@ public class Favorite {
   private User user;
 
   @ManyToOne
-  @JoinColumn(name = "selectedpackage_id", nullable = false)
-  private SelectedPackage selectedPackage;
+  @JoinColumn(name = "trip_id", nullable = false)
+  private Trip trip;
 
   public int getId() {
     return id;
@@ -38,13 +41,13 @@ public class Favorite {
   public void setUser(User user) {
     this.user = user;
   }
-
-  public SelectedPackage getSelectedpackage() {
-    return selectedPackage;
+  
+  public Trip getTrip() {
+    return trip;
   }
 
-  public void setSelectedpackage(SelectedPackage selectedPackage) {
-    this.selectedPackage = selectedPackage;
+  public void setTrip(Trip trip) {
+    this.trip = trip;
   }
 
 }

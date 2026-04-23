@@ -1,38 +1,43 @@
-// package com.roamroute.backend.config;
+package com.roamroute.backend.config;
 
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-// import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-// import org.springframework.security.web.SecurityFilterChain;
 
-// @Configuration
-// public class SecurityConfig {
+import org.springframework.security.config.Customizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
-//   @Bean
-//   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+@Configuration
+public class SecurityConfig {
 
-//     http
-//       .csrf(csrf -> csrf.disable())
-//       .authorizeHttpRequests(auth -> auth
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-//         // Public endpoints
-//         .requestMatchers("/api/auth/**").permitAll()
-//         .requestMatchers("/api/trips/**").permitAll()
+    http
+      .csrf(csrf -> csrf.disable())
+      .cors(Customizer.withDefaults())
+      .authorizeHttpRequests(auth -> auth
+
+        // Public endpoints
+        .requestMatchers("/api/auth/**").permitAll()
+        .requestMatchers("/api/trips/**").permitAll()
         
-//         // Admin only
-//         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+        // Admin only
+        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
+        .requestMatchers("/api/favorites/**").authenticated() // Requires authentication for favorites endpoints
         
-//         //Everything else requires authentication
-//         .anyRequest().authenticated()
-//       )
-//       .httpBasic();  // Temporary, for testing purposes. Replace with JWT or similar in production.
+        //Everything else 
+        .anyRequest().permitAll()
+      )
+      .httpBasic(Customizer.withDefaults());  // Temporary, for testing purposes. Replace with JWT or similar in production.
 
-//     return http.build();
-//   }
+    return http.build();
+  }
 
-//   @Bean
-//   public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
-//     return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance(); // For testing only. Use a real password encoder in production!  
-//   }
+  @Bean
+  public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
+    return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance(); // For testing only. Use a real password encoder in production!  
+  }
 
-// }
+}

@@ -90,9 +90,9 @@ CREATE TABLE selectedpackages (
 CREATE TABLE favorites (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT,
-  selectedpackage_id INT,
+  trip_id INT,
   FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (selectedpackage_id) REFERENCES selectedpackages(id)
+  FOREIGN KEY (trip_id) REFERENCES trips(id)
 );
 
 -- ContactMessages table
