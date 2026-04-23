@@ -1,6 +1,7 @@
 package com.roamroute.backend.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,5 +11,5 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 
   List<Trip> findTop3ByOrderByIdAsc();
 
-  Trip findById(int id);
+  Optional<Trip> findById(int id);
 }

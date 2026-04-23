@@ -63,7 +63,7 @@ public class TripService {
     }
 
     public TripDetailsDTO getTripDetails(int id) {
-        Trip trip = tripRepository.findById(id);
+        Trip trip = tripRepository.findById(id).orElseThrow();
         
         String flightDuration = tripPriceRepository
             .findByTrip_IdAndFlightIsNotNull(id)
