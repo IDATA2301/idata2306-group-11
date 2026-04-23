@@ -1,6 +1,7 @@
 package com.roamroute.backend.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +27,11 @@ public class AuthController {
   private static final int MAX_USERNAME_LENGTH = 20;
 
   private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
-  public AuthController(UserRepository userRepository) {
+  public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @PostMapping("/register")
@@ -55,7 +58,7 @@ public class AuthController {
     User user = new User();
     user.setUser_name(normalizedUserName);
     user.setEmail(normalizedEmail);
-    user.setUser_password(request.getPassword());
+    user.setUser_password(passwordEncoder.encode(request.getPassword()));
     user.setUser_role("USER");
     user.setUser_address(StringUtils.hasText(request.getAddress()) ? request.getAddress().trim() : null);
     user.setUser_country(StringUtils.hasText(request.getCountry()) ? request.getCountry().trim() : null);
@@ -82,7 +85,7 @@ public class AuthController {
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
     }
 
-    if (!user.getUser_password().equals(request.getPassword())) {
+    if (!passwordEncoder.matches(request.getPassword(), user.getUser_password())) {
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
     }
 
