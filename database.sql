@@ -90,9 +90,9 @@ CREATE TABLE selectedpackages (
 CREATE TABLE favorites (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT,
-  selectedpackage_id INT,
+  trip_id INT,
   FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (selectedpackage_id) REFERENCES selectedpackages(id)
+  FOREIGN KEY (trip_id) REFERENCES trips(id)
 );
 
 -- ContactMessages table
@@ -149,7 +149,7 @@ VALUES
   ('Barcelona', 'Spain', 'barcelona.jpg', 'Beautiful view of Barcelona'),
   ('Naples', 'Italy', 'naples.jpg', 'Scenic view of Naples'),
   ('Paris', 'France', 'parisDest.jpg', 'Iconic view of Paris'),
-  ('Tokyo', 'Japan', 'tokyoDest.png', 'Vibrant cityscape of Tokyo');
+  ('Tokyo', 'Japan', 'tokyoDest.jpg', 'Vibrant cityscape of Tokyo');
 
 INSERT INTO flights (airline, departure_city, destination_city, departure_airport, destination_airport, flight_duration)
 VALUES

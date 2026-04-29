@@ -1,5 +1,6 @@
 package com.roamroute.backend.service;
 
+import java.sql.Date;
 import java.util.Comparator;
 import java.util.List;
 
@@ -44,20 +45,25 @@ public class TripService {
                 .min()
                 .orElse(0);
 
+            Date startDate = trip.getStart_date();
+            Date endDate = trip.getEnd_date();
+
             return new TripHomeDTO(
                 trip.getId(),
                 trip.getTitle(),
                 trip.getImage_url(),
                 trip.getDestination().getCity(),
                 trip.getDestination().getCountry(),
-                lowestFlight + lowestHotel
+                lowestFlight + lowestHotel,
+                startDate,
+                endDate
             );
 
         }).toList();
     }
 
     public TripDetailsDTO getTripDetails(int id) {
-        Trip trip = tripRepository.findById(id);
+        Trip trip = tripRepository.findById(id).orElseThrow();
         
         String flightDuration = tripPriceRepository
             .findByTrip_IdAndFlightIsNotNull(id)
@@ -69,7 +75,11 @@ public class TripService {
         List<TripPriceDTO> flightOptions = tripPriceRepository
             .findByTrip_IdAndFlightIsNotNull(id)
             .stream()
-            .map(tp -> new TripPriceDTO(tp.getId(), tp.getTripprice_provider(), tp.getPrice().doubleValue()))
+            .map(tp -> new TripPriceDTO(
+                tp.getId(),
+                tp.getTripprice_provider(),
+                tp.getPrice().doubleValue(),
+                tp.getFlight().getAirline()))
             .sorted(Comparator.comparingDouble(TripPriceDTO::getPrice)) 
             .toList();
 

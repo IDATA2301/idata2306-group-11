@@ -63,7 +63,7 @@ Table tripprices {
 Table favorites {
   id int [pk, increment]
   user_id int
-  selectedpackage_id int
+  trip_id int
 }
 
 Table contactmessages {
@@ -118,7 +118,7 @@ Ref: tripprices.accommodation_id > accommodations.id
 
 
 Ref: favorites.user_id > users.id
-Ref: favorites.selectedpackage_id > selectedpackages.id
+Ref: favorites.trip_id > trips.id
 
 Ref: contactmessages.user_id > users.id
 
