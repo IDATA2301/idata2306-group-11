@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.roamroute.backend.dto.TripHomeDTO;
 import com.roamroute.backend.entity.Favorite;
 import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.entity.User;
 import com.roamroute.backend.repository.FavoriteRepository;
 import com.roamroute.backend.repository.TripRepository;
 import com.roamroute.backend.repository.UserRepository;
+import com.roamroute.backend.service.TripService;
 
 @RestController
 @RequestMapping("/api/favorites")
@@ -27,13 +29,16 @@ public class FavoriteController {
   private final FavoriteRepository favoriteRepository;
   private final TripRepository tripRepository;
   private final UserRepository userRepository;
+  private final TripService tripService;
 
   public FavoriteController(FavoriteRepository favoriteRepository,
                             TripRepository tripRepository,
-                            UserRepository userRepository) {
+                            UserRepository userRepository,
+                            TripService tripService) {
     this.favoriteRepository = favoriteRepository;
     this.tripRepository = tripRepository;
     this.userRepository = userRepository;
+    this.tripService = tripService;
   }
 
   @PostMapping
@@ -61,6 +66,16 @@ public class FavoriteController {
     String email = authentication.getName();
     User user = userRepository.findByEmail(email).orElseThrow();
     return favoriteRepository.findByUser_Id(user.getId());
+  }
+
+  @GetMapping("/trips")
+  public List<TripHomeDTO> getFavoritedTrips(Authentication authentication) {
+    String email = authentication.getName();
+    User user = userRepository.findByEmail(email).orElseThrow();
+    return favoriteRepository.findByUser_Id(user.getId()).stream()
+      .map(Favorite::getTrip)
+      .map(tripService::toHomeDto)
+      .toList();
   }
 
   @DeleteMapping("/{tripId}")

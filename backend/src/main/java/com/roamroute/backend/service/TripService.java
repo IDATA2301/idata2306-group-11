@@ -26,40 +26,39 @@ public class TripService {
     }
 
     public List<TripHomeDTO> getHomeTrips() {
+        return tripRepository.findTop3ByOrderByIdAsc().stream()
+            .map(this::toHomeDto)
+            .toList();
+    }
 
-        List<Trip> trips = tripRepository.findTop3ByOrderByIdAsc();
+    public TripHomeDTO toHomeDto(Trip trip) {
+        double lowestFlight = tripPriceRepository
+            .findByTrip_IdAndFlightIsNotNull(trip.getId())
+            .stream()
+            .mapToDouble(tp -> tp.getPrice().doubleValue())
+            .min()
+            .orElse(0);
 
-        return trips.stream().map(trip -> {
+        double lowestHotel = tripPriceRepository
+            .findByTrip_IdAndAccommodationIsNotNull(trip.getId())
+            .stream()
+            .mapToDouble(tp -> tp.getPrice().doubleValue())
+            .min()
+            .orElse(0);
 
-            double lowestFlight = tripPriceRepository
-                .findByTrip_IdAndFlightIsNotNull(trip.getId())
-                .stream()
-                .mapToDouble(tp -> tp.getPrice().doubleValue())
-                .min()
-                .orElse(0);
+        Date startDate = trip.getStart_date();
+        Date endDate = trip.getEnd_date();
 
-            double lowestHotel = tripPriceRepository
-                .findByTrip_IdAndAccommodationIsNotNull(trip.getId())
-                .stream()
-                .mapToDouble(tp -> tp.getPrice().doubleValue())
-                .min()
-                .orElse(0);
-
-            Date startDate = trip.getStart_date();
-            Date endDate = trip.getEnd_date();
-
-            return new TripHomeDTO(
-                trip.getId(),
-                trip.getTitle(),
-                trip.getImage_url(),
-                trip.getDestination().getCity(),
-                trip.getDestination().getCountry(),
-                lowestFlight + lowestHotel,
-                startDate,
-                endDate
-            );
-
-        }).toList();
+        return new TripHomeDTO(
+            trip.getId(),
+            trip.getTitle(),
+            trip.getImage_url(),
+            trip.getDestination().getCity(),
+            trip.getDestination().getCountry(),
+            lowestFlight + lowestHotel,
+            startDate,
+            endDate
+        );
     }
 
     public TripDetailsDTO getTripDetails(int id) {
