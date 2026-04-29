@@ -44,7 +44,7 @@ public class FavoriteController {
   @PostMapping
   public Favorite addFavorite(Authentication authentication, @RequestParam int tripId) {
 
-    String userEmail = authentication.getName(); 
+    String userEmail = authentication.getName();
     User user = userRepository.findByEmail(userEmail).orElseThrow();
     Trip trip = tripRepository.findById(tripId).orElseThrow();
 
@@ -69,12 +69,12 @@ public class FavoriteController {
   }
 
   @GetMapping("/trips")
-  public List<TripHomeDTO> getFavoritedTrips(Authentication authentication) {
+  public List<TripHomeDTO> getFavoriteTrips(Authentication authentication) {
     String email = authentication.getName();
     User user = userRepository.findByEmail(email).orElseThrow();
     return favoriteRepository.findByUser_Id(user.getId()).stream()
       .map(Favorite::getTrip)
-      .map(tripService::toHomeDto)
+      .map(tripService::toTripHomeDTO)
       .toList();
   }
 
