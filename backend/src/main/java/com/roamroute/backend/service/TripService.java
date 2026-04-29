@@ -117,17 +117,20 @@ public class TripService {
         );
     }
 
-    public List<Trip> searchTrips(String query) {
-        if (query == null) {
-            return List.of();
-        }
+    public List<TripHomeDTO> searchTrips(String query, Double minPrice, Double maxPrice, Integer destinationId) {
+        String normalizedQuery = query == null ? "" : query.trim();
 
-        String normalizedQuery = query.trim();
-        if (normalizedQuery.isEmpty()) {
-            return List.of();
-        }
+        List<Trip> trips = normalizedQuery.isEmpty()
+            ? tripRepository.findAll()
+            : tripRepository.searchTrips(normalizedQuery);
 
-        return tripRepository.searchTrips(normalizedQuery);
+        return trips.stream()
+            .filter(t -> destinationId == null
+                || (t.getDestination() != null && t.getDestination().getId() == destinationId))
+            .map(this::toTripHomeDTO)
+            .filter(dto -> minPrice == null || dto.getLowestPrice() >= minPrice)
+            .filter(dto -> maxPrice == null || dto.getLowestPrice() <= maxPrice)
+            .toList();
     }
 
     public TripHomeDTO toTripHomeDTO(Trip trip) {
