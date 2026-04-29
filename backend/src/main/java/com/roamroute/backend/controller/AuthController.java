@@ -79,11 +79,8 @@ public class AuthController {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email and password are required");
     }
 
-    User user = userRepository.findByEmail(request.getEmail().trim().toLowerCase()).orElseThrow();
-
-    if (user == null) {
-      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
-    }
+    User user = userRepository.findByEmail(request.getEmail().trim().toLowerCase())
+      .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
 
     if (!passwordEncoder.matches(request.getPassword(), user.getUser_password())) {
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
