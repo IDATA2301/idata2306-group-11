@@ -4,14 +4,26 @@ public class LoginResponse {
 
   private int id;
   private String userName;
+  private String fullName;
   private String email;
   private String role;
+  private String token;
 
-  public LoginResponse(int id, String userName, String email, String role) {
+  public LoginResponse(int id, String userName, String fullName, String email, String role, String token) {
     this.id = id;
     this.userName = userName;
+    this.fullName = fullName;
     this.email = email;
     this.role = role;
+    this.token = token;
+  }
+
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 
   public int getId() {
@@ -44,5 +56,13 @@ public class LoginResponse {
 
   public void setRole(String role) {
     this.role = role;
+  }
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
   }
 }

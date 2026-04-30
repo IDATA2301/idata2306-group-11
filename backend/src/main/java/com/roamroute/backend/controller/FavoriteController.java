@@ -27,24 +27,24 @@ import com.roamroute.backend.service.TripService;
 @CrossOrigin
 public class FavoriteController {
   private final FavoriteRepository favoriteRepository;
-  private final TripService tripService;
   private final TripRepository tripRepository;
   private final UserRepository userRepository;
+  private final TripService tripService;
 
   public FavoriteController(FavoriteRepository favoriteRepository,
-                            TripService tripService,
                             TripRepository tripRepository,
-                            UserRepository userRepository) {
+                            UserRepository userRepository,
+                            TripService tripService) {
     this.favoriteRepository = favoriteRepository;
-    this.tripService = tripService;
     this.tripRepository = tripRepository;
     this.userRepository = userRepository;
+    this.tripService = tripService;
   }
 
   @PostMapping
   public Favorite addFavorite(Authentication authentication, @RequestParam int tripId) {
 
-    String userEmail = authentication.getName(); 
+    String userEmail = authentication.getName();
     User user = userRepository.findByEmail(userEmail).orElseThrow();
     Trip trip = tripRepository.findById(tripId).orElseThrow();
 
@@ -61,22 +61,21 @@ public class FavoriteController {
     return favoriteRepository.save(favorite);
   }
 
-  @GetMapping("/trips")
-  public List<TripHomeDTO> getFavoriteTrips(Authentication authentication) {
-    String email = authentication.getName();
-    User user = userRepository.findByEmail(email).orElseThrow();
-    List<Favorite> favorites = favoriteRepository.findByUser_Id(user.getId());
-
-    return favorites.stream()
-      .map(fav -> tripService.toTripHomeDTO(fav.getTrip()))
-      .toList();
-  }
-
   @GetMapping
   public List<Favorite> getFavoritesByUserEmail(Authentication authentication) {
     String email = authentication.getName();
     User user = userRepository.findByEmail(email).orElseThrow();
     return favoriteRepository.findByUser_Id(user.getId());
+  }
+
+  @GetMapping("/trips")
+  public List<TripHomeDTO> getFavoriteTrips(Authentication authentication) {
+    String email = authentication.getName();
+    User user = userRepository.findByEmail(email).orElseThrow();
+    return favoriteRepository.findByUser_Id(user.getId()).stream()
+      .map(Favorite::getTrip)
+      .map(tripService::toTripHomeDTO)
+      .toList();
   }
 
   @DeleteMapping("/{tripId}")

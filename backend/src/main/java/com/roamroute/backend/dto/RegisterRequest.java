@@ -2,18 +2,18 @@ package com.roamroute.backend.dto;
 
 public class RegisterRequest {
 
-  private String userName;
+  private String fullName;
   private String email;
   private String password;
   private String address;
   private String country;
 
-  public String getUserName() {
-    return userName;
+  public String getFullName() {
+    return fullName;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 
   public String getEmail() {

@@ -17,6 +17,9 @@ public class User {
   @Column(name = "user_name", unique = true, nullable = false, length = 20)
   private String user_name;
 
+  @Column(name = "full_name", length = 100)
+  private String full_name;
+
   @Column(unique = true)
   private String email;
 
@@ -42,6 +45,14 @@ public class User {
 
   public void setUser_name(String user_name) {
     this.user_name = user_name;
+  }
+
+  public String getFull_name() {
+    return full_name;
+  }
+
+  public void setFull_name(String full_name) {
+    this.full_name = full_name;
   }
 
   public String getEmail() {

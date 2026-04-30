@@ -26,12 +26,9 @@ public class TripService {
     }
 
     public List<TripHomeDTO> getHomeTrips() {
-
-        List<Trip> trips = tripRepository.findTop3ByOrderByIdAsc();
-
-        return trips.stream()
-        .map(this::toTripHomeDTO)
-        .toList();
+        return tripRepository.findTop3ByOrderByIdAsc().stream()
+            .map(this::toTripHomeDTO)
+            .toList();
     }
 
     public TripDetailsDTO getTripDetails(int id) {
