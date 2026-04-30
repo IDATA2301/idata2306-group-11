@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.roamroute.backend.dto.TripDetailsDTO;
 import com.roamroute.backend.dto.TripHomeDTO;
-import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.service.TripService;
 
 @RestController
@@ -24,8 +23,13 @@ public class TripController {
     }
 
     @GetMapping("/search")
-    public List<Trip> searchTrips(@RequestParam String q) {
-        return tripService.searchTrips(q);
+    public List<TripHomeDTO> searchTrips(
+        @RequestParam(required = false) String q,
+        @RequestParam(required = false) Double minPrice,
+        @RequestParam(required = false) Double maxPrice,
+        @RequestParam(required = false) Integer destinationId
+    ) {
+        return tripService.searchTrips(q, minPrice, maxPrice, destinationId);
     }
 
     @GetMapping("/home")
