@@ -1,17 +1,13 @@
 package com.roamroute.backend.entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
+import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,14 +22,24 @@ public class Order {
   @JoinColumn(name = "user_id")
   private User user;
 
-  private LocalDateTime orderDate;
+  @ManyToOne
+  @JoinColumn(name = "trip_id")
+  private Trip trip;
 
-  private BigDecimal totalAmount;
+  @ManyToOne
+  @JoinColumn(name = "flight_id")
+  private Flight flight;
+
+  @ManyToOne
+  @JoinColumn(name = "accommodation_id")
+  private Accommodation accommodation;
+
+  private Date order_date;
+
+  private BigDecimal total_price;
 
   private String status;
 
-  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-  private List<OrderItem> items;
 
   public int getId() {
     return id;
@@ -51,20 +57,44 @@ public class Order {
     this.user = user;
   }
 
-  public LocalDateTime getOrderDate() {
-    return orderDate;
+  public Trip getTrip() {
+    return trip;
   }
 
-  public void setOrderDate(LocalDateTime orderDate) {
-    this.orderDate = orderDate;
+  public void setTrip(Trip trip) {
+    this.trip = trip;
   }
 
-  public BigDecimal getTotalAmount() {
-    return totalAmount;
+  public Flight getFlight() {
+    return flight;
   }
 
-  public void setTotalAmount(BigDecimal totalAmount) {
-    this.totalAmount = totalAmount;
+  public void setFlight(Flight flight) {
+    this.flight = flight;
+  }
+
+  public Accommodation getAccommodation() {
+    return accommodation;
+  }
+
+  public void setAccommodation(Accommodation accommodation) {
+    this.accommodation = accommodation;
+  }
+
+  public Date getOrder_date() {
+    return order_date;
+  }
+
+  public void setOrder_date(Date order_date) {
+    this.order_date = order_date;
+  }
+
+  public BigDecimal getTotal_price() {
+    return total_price;
+  }
+
+  public void setTotal_price(BigDecimal total_price) {
+    this.total_price = total_price;
   }
 
   public String getStatus() {
@@ -75,12 +105,5 @@ public class Order {
     this.status = status;
   }
 
-  public List<OrderItem> getItems() {
-    return items;
-  }
-
-  public void setItems(List<OrderItem> items) {
-    this.items = items;
-  }
 
 }
