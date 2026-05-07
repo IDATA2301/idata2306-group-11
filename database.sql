@@ -127,21 +127,18 @@ CREATE TABLE cart_items (
 CREATE TABLE orders (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT NOT NULL,
+  trip_id INT NOT NULL,
+  flight_id INT NOT NULL,
+  accommodation_id INT NOT NULL,
   order_date DATETIME,
   total_price DECIMAL(10, 2),
   status VARCHAR(50),
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (trip_id) REFERENCES trips(id),
+  FOREIGN KEY (flight_id) REFERENCES flights(id),
+  FOREIGN KEY (accommodation_id) REFERENCES accommodations(id)
 );
 
--- OrderItems table
-CREATE TABLE order_items (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  order_id INT NOT NULL,
-  selectedpackage_id INT NOT NULL,
-  price_at_purchase DECIMAL(10, 2),
-  FOREIGN KEY (order_id) REFERENCES orders(id),
-  FOREIGN KEY (selectedpackage_id) REFERENCES selectedpackages(id)
-);
 
 -- Seed data
 INSERT INTO destinations (city, country, image_url, image_alt)
