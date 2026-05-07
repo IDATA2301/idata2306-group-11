@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.roamroute.backend.dto.TripDetailsDTO;
 import com.roamroute.backend.dto.TripHomeDTO;
 import com.roamroute.backend.dto.TripPriceDTO;
+import com.roamroute.backend.dto.UpdateTripRequest;
 import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.repository.TripPriceRepository;
 import com.roamroute.backend.repository.TripRepository;
@@ -115,6 +116,33 @@ public class TripService {
             latitude,
             longitude
         );
+    }
+
+    public TripDetailsDTO updateTrip(int id, UpdateTripRequest request) {
+        Trip trip = tripRepository.findById(id).orElseThrow();
+
+        if (request.getTitle() != null) {
+            trip.setTitle(request.getTitle());
+        }
+        if (request.getDescription() != null) {
+            trip.setTrip_description(request.getDescription());
+        }
+        if (request.getImageUrl() != null) {
+            trip.setImage_url(request.getImageUrl());
+        }
+        if (request.getStartDate() != null) {
+            trip.setStart_date(Date.valueOf(request.getStartDate()));
+        }
+        if (request.getEndDate() != null) {
+            trip.setEnd_date(Date.valueOf(request.getEndDate()));
+        }
+        if (request.getKeywords() != null) {
+            trip.setKeywords(String.join(",", request.getKeywords()));
+        }
+
+        tripRepository.save(trip);
+
+        return getTripDetails(id);
     }
 
     public List<TripHomeDTO> searchTrips(String query, Double minPrice, Double maxPrice, Integer destinationId) {
