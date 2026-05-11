@@ -2,15 +2,21 @@ package com.roamroute.backend.controller;
 
 import java.util.List;
 
+import org.hibernate.sql.Update;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.roamroute.backend.dto.AdminUserDetailsDTO;
 import com.roamroute.backend.dto.AdminUsersDTO;
 import com.roamroute.backend.dto.AdminUsersOrdersDTO;
+import com.roamroute.backend.dto.UpdateUserRoleRequest;
 import com.roamroute.backend.entity.Accommodation;
 import com.roamroute.backend.entity.Flight;
 import com.roamroute.backend.entity.Trip;
@@ -72,5 +78,23 @@ public class AdminController {
 
       })
       .toList();
+  }
+
+  @PutMapping("/users/{id}/role")
+  public AdminUsersDTO updateUserRole(@PathVariable int id, @RequestBody UpdateUserRoleRequest request) {
+    User user = userRepository.findById(id)
+      .orElseThrow(() -> new RuntimeException("User not found"));
+
+    String newRole = request.getRole();
+
+    if (!newRole.equals("USER") && !newRole.equals("ADMIN")) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Invalid role. Role must be either 'USER' or 'ADMIN'.");
+    }
+
+    user.setUser_role(newRole);
+
+    User updatedUser = userRepository.save(user);
+
+    return new AdminUsersDTO(updatedUser.getId(), updatedUser.getUser_name(), updatedUser.getEmail(), updatedUser.getUser_role());
   }
 }
