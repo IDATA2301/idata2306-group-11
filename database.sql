@@ -142,17 +142,17 @@ CREATE TABLE orders (
 INSERT INTO destinations (city, country, image_url, image_alt)
 VALUES
   ('Barcelona', 'Spain', 'barcelona.webp', 'Beautiful view of Barcelona'),
-  ('Naples', 'Italy', 'naples.webp', 'Scenic view of Naples'),
+  ('Naples', 'Italy', 'naplesDest.webp', 'Scenic view of Naples'),
   ('Paris', 'France', 'parisDest.webp', 'Iconic view of Paris'),
   ('Tokyo', 'Japan', 'tokyoDest.webp', 'Vibrant cityscape of Tokyo'),
-  ('New York', 'USA', 'newyork.webp', 'City Lights of New York'),
-  ('Rome', 'Italy', 'rome.webp', 'Historic Rome with ancient architecture'),
-  ('Reykjavik', 'Iceland', 'reykjavik.webp', 'Arctic landscape of Reykjavik'),
+  ('New York', 'USA', 'newyorkDest.webp', 'City Lights of New York'),
+  ('Rome', 'Italy', 'romeDest.webp', 'Historic Rome with ancient architecture'),
+  ('Reykjavik', 'Iceland', 'reykjavikDest.webp', 'Arctic landscape of Reykjavik'),
   ('Vienna', 'Austria', 'vienna.webp', 'Classical Vienna cityscape'),
   ('Athens', 'Greece', 'athens.webp', 'Ancient Athens with Mediterranean charm'),
-  ('Berlin', 'Germany', 'berlin.webp', 'Modern and historic Berlin'),
-  ('Dublin', 'Ireland', 'dublin.webp', 'Colorful Dublin cityscape'),
-  ('Cape Town', 'South Africa', 'capetown.webp', 'Scenic Cape Town with Table Mountain');
+  ('Berlin', 'Germany', 'berlinDest.webp', 'Modern and historic Berlin'),
+  ('Dublin', 'Ireland', 'dublinDest.webp', 'Colorful Dublin cityscape'),
+  ('Cape Town', 'South Africa', 'capetownDest.webp', 'Scenic Cape Town with Table Mountain');
 
 INSERT INTO flights (id, airline, departure_city, destination_city, departure_airport, destination_airport, flight_duration)
 VALUES
