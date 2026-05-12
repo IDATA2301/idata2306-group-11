@@ -2,8 +2,11 @@ package com.roamroute.backend.controller;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +18,6 @@ import com.roamroute.backend.entity.Order;
 import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.entity.TripPrice;
 import com.roamroute.backend.entity.User;
-import com.roamroute.backend.repository.AccommodationRepository;
-import com.roamroute.backend.repository.FlightRepository;
 import com.roamroute.backend.repository.OrderRepository;
 import com.roamroute.backend.repository.TripPriceRepository;
 import com.roamroute.backend.repository.TripRepository;
@@ -30,23 +31,17 @@ public class OrderController {
   private final OrderRepository orderRepository;
   private final UserRepository userRepository;
   private final TripRepository tripRepository;
-  private final FlightRepository flightRepository;
-  private final AccommodationRepository accommodationRepository;
   private final TripPriceRepository tripPriceRepository;
 
   public OrderController(
     OrderRepository orderRepository,
     UserRepository userRepository,
     TripRepository tripRepository,
-    FlightRepository flightRepository,
-    AccommodationRepository accommodationRepository,
     TripPriceRepository tripPriceRepository
   ) {
     this.orderRepository = orderRepository;
     this.userRepository = userRepository;
     this.tripRepository = tripRepository;
-    this.flightRepository = flightRepository;
-    this.accommodationRepository = accommodationRepository;
     this.tripPriceRepository = tripPriceRepository;
   }
 
@@ -83,5 +78,15 @@ public class OrderController {
     return orderRepository.save(order);
   }
 
+  @GetMapping
+  public List<Order> getUserOrders(Authentication auth) {
+    User user = userRepository.findByEmail(auth.getName()).orElseThrow(() -> new RuntimeException("User not found"));
+    return orderRepository.findByUser(user);
+  }
+
+  @GetMapping("/{id}")
+  public Order getOrderById(@PathVariable int id) {
+    return orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+  }
 
 }
