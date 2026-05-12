@@ -1,7 +1,5 @@
 -- Reset database so this script can be rerun safely
-DROP DATABASE IF EXISTS roamroute_db;
-CREATE DATABASE roamroute_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE roamroute_db;
+USE roamroute;
 
 -- Users table
 CREATE TABLE users (
