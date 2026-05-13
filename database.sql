@@ -141,15 +141,15 @@ CREATE TABLE orders (
 -- Seed data
 INSERT INTO destinations (city, country, image_url, image_alt)
 VALUES
-  ('Barcelona', 'Spain', 'barcelona.webp', 'Beautiful view of Barcelona'),
+  ('Barcelona', 'Spain', 'barcelonaDest.webp', 'Beautiful view of Barcelona'),
   ('Naples', 'Italy', 'naplesDest.webp', 'Scenic view of Naples'),
   ('Paris', 'France', 'parisDest.webp', 'Iconic view of Paris'),
   ('Tokyo', 'Japan', 'tokyoDest.webp', 'Vibrant cityscape of Tokyo'),
   ('New York', 'USA', 'newyorkDest.webp', 'City Lights of New York'),
   ('Rome', 'Italy', 'romeDest.webp', 'Historic Rome with ancient architecture'),
   ('Reykjavik', 'Iceland', 'reykjavikDest.webp', 'Arctic landscape of Reykjavik'),
-  ('Vienna', 'Austria', 'vienna.webp', 'Classical Vienna cityscape'),
-  ('Athens', 'Greece', 'athens.webp', 'Ancient Athens with Mediterranean charm'),
+  ('Vienna', 'Austria', 'viennaDest.webp', 'Classical Vienna cityscape'),
+  ('Athens', 'Greece', 'athensDest.webp', 'Ancient Athens with Mediterranean charm'),
   ('Berlin', 'Germany', 'berlinDest.webp', 'Modern and historic Berlin'),
   ('Dublin', 'Ireland', 'dublinDest.webp', 'Colorful Dublin cityscape'),
   ('Cape Town', 'South Africa', 'capetownDest.webp', 'Scenic Cape Town with Table Mountain');
