@@ -93,13 +93,23 @@ public class TripService {
         double latitude = accommodation != null ? accommodation.getLatitude() : 0;
         double longitude = accommodation != null ? accommodation.getLongitude() : 0;
 
-        return new TripDetailsDTO(  
+        var destination = trip.getDestination();
+        Integer destinationId = destination != null ? destination.getId() : null;
+        String city = destination != null ? destination.getCity() : "";
+        String country = destination != null ? destination.getCountry() : "";
+        String destinationImageUrl = destination != null ? destination.getImage_url() : null;
+        String destinationImageAlt = destination != null ? destination.getImage_alt() : null;
+
+        return new TripDetailsDTO(
             trip.getId(),
             trip.getTitle(),
             trip.getTrip_description(),
             trip.getImage_url(),
-            trip.getDestination().getCity(),
-            trip.getDestination().getCountry(),
+            destinationId,
+            city,
+            country,
+            destinationImageUrl,
+            destinationImageAlt,
             trip.getStart_date().toString(),
             trip.getEnd_date().toString(),
             flightDuration,
