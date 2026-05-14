@@ -65,8 +65,8 @@ public class Flight {
     return destination_airport;
   }
 
-  public void setArrival_airport(String arrival_airport) {
-    this.destination_airport = arrival_airport;
+  public void setDestination_airport(String destination_airport) {
+    this.destination_airport = destination_airport;
   }
 
   public String getFlight_duration() {
