@@ -1,0 +1,54 @@
+package com.roamroute.backend.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.roamroute.backend.dto.FlightDTO;
+import com.roamroute.backend.dto.FlightRequest;
+import com.roamroute.backend.service.FlightService;
+
+@RestController
+@RequestMapping("/api/admin/flights")
+public class AdminFlightController {
+
+  private final FlightService flightService;
+
+  public AdminFlightController(FlightService flightService) {
+    this.flightService = flightService;
+  }
+
+  @GetMapping
+  public List<FlightDTO> list() {
+    return flightService.list();
+  }
+
+  @GetMapping("/{id}")
+  public FlightDTO get(@PathVariable int id) {
+    return flightService.get(id);
+  }
+
+  @PostMapping
+  public FlightDTO create(@RequestBody FlightRequest request) {
+    return flightService.create(request);
+  }
+
+  @PutMapping("/{id}")
+  public FlightDTO update(@PathVariable int id, @RequestBody FlightRequest request) {
+    return flightService.update(id, request);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> delete(@PathVariable int id) {
+    flightService.delete(id);
+    return ResponseEntity.noContent().build();
+  }
+}
