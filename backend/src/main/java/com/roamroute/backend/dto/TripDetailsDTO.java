@@ -8,8 +8,11 @@ public class TripDetailsDTO {
     private String title;
     private String description;
     private String imageUrl;
+    private Integer destinationId;
     private String city;
     private String country;
+    private String destinationImageUrl;
+    private String destinationImageAlt;
     private String startDate;
     private String endDate;
     private String flightDuration;
@@ -27,7 +30,8 @@ public class TripDetailsDTO {
     private double longitude;
 
     public TripDetailsDTO(int id, String title, String description,
-                          String imageUrl, String city, String country,
+                          String imageUrl, Integer destinationId, String city, String country,
+                          String destinationImageUrl, String destinationImageAlt,
                           String startDate, String endDate,
                           String flightDuration, List<TripPriceDTO> flightOptions, List<TripPriceDTO> hotelOptions,
                           String departureAirport, String arrivalAirport, List<String> keywords,
@@ -37,8 +41,11 @@ public class TripDetailsDTO {
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.destinationId = destinationId;
         this.city = city;
         this.country = country;
+        this.destinationImageUrl = destinationImageUrl;
+        this.destinationImageAlt = destinationImageAlt;
         this.startDate = startDate;
         this.endDate = endDate;
         this.flightDuration = flightDuration;
@@ -54,6 +61,18 @@ public class TripDetailsDTO {
         this.nights = nights;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public Integer getDestinationId() {
+        return destinationId;
+    }
+
+    public String getDestinationImageUrl() {
+        return destinationImageUrl;
+    }
+
+    public String getDestinationImageAlt() {
+        return destinationImageAlt;
     }
 
     public int getId() {
