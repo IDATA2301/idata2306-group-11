@@ -74,16 +74,6 @@ CREATE TABLE tripprices (
   FOREIGN KEY (accommodation_id) REFERENCES accommodations(id)
 );
 
--- SelectedPackages table
-CREATE TABLE selectedpackages (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  trip_id INT,
-  flight_tripprice_id INT,
-  hotel_tripprice_id INT,
-  FOREIGN KEY (trip_id) REFERENCES trips(id),
-  FOREIGN KEY (flight_tripprice_id) REFERENCES tripprices(id),
-  FOREIGN KEY (hotel_tripprice_id) REFERENCES tripprices(id)
-);
 
 -- Favorites table
 CREATE TABLE favorites (
@@ -104,23 +94,6 @@ CREATE TABLE contactmessages (
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Carts table
-CREATE TABLE carts (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  user_id INT NOT NULL,
-  created_at DATETIME,
-  status VARCHAR(50),
-  FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
--- CartItems table
-CREATE TABLE cart_items (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  cart_id INT,
-  selectedpackage_id INT,
-  FOREIGN KEY (cart_id) REFERENCES carts(id),
-  FOREIGN KEY (selectedpackage_id) REFERENCES selectedpackages(id)
-);
 
 -- Orders table
 CREATE TABLE orders (
@@ -226,7 +199,7 @@ INSERT INTO trips (id, title, trip_description, start_date, end_date, duration_d
 VALUES
   (1023, 'Warm winter trip Alesund -> Barcelona',
    'A family-friendly economy trip from Alesund to Barcelona, ideal for a warm winter escape.',
-  '2026-02-13', '2026-02-20', 7, 'Economy, Family, City Break, Winter Sun', 1, 'barcelonaTrip-01.webp'),
+  '2027-02-13', '2027-02-20', 7, 'Economy, Family, City Break, Winter Sun', 1, 'barcelonaTrip-01.webp'),
   (5001, 'Autumn Barcelona Escape Bergen -> Barcelona',
    'A relaxed autumn getaway from Bergen to Barcelona with food, culture, and seaside walks.',
   '2026-09-15', '2026-09-22', 7, 'Culture, Food, City Break, Autumn', 1, 'barcelonaTrip-02.webp'),
@@ -235,16 +208,16 @@ VALUES
   '2026-12-01', '2026-12-08', 7, 'Beach, Shopping, City Break, Summer', 1, 'barcelonaTrip-03.webp'),
   (2047, 'Spring Getaway Oslo -> Naples',
    'A relaxing and budget-friendly cultural trip from Oslo to Naples, perfect for travelers seeking warmer weather, Italian cuisine, and historic attractions.',
-  '2026-04-10', '2026-04-17', 7, 'Economy, Couples, City Break, Spring Sun', 2, 'naplesTrip-01.webp'),
+  '2027-04-10', '2027-04-17', 7, 'Economy, Couples, City Break, Spring Sun', 2, 'naplesTrip-01.webp'),
   (5003, 'Naples Heritage Trip Stavanger -> Naples',
    'A scenic spring trip from Stavanger to Naples focused on history, food, and coastal views.',
-  '2026-05-05', '2026-05-12', 7, 'History, Food, Culture, Spring', 2, 'naplesTrip-02.webp'),
+  '2027-05-05', '2027-05-12', 7, 'History, Food, Culture, Spring', 2, 'naplesTrip-02.webp'),
   (5004, 'Naples Coast & Culture Kristiansand -> Naples',
    'A late-summer escape from Kristiansand to Naples with culture, city life, and great local cuisine.',
   '2026-09-20', '2026-09-27', 7, 'Culture, Food, City Break, Late Summer', 2, 'naplesTrip-03.webp'),
   (3198, 'Romantic Spring Escape Trondheim -> Paris',
    'A relaxed and romantic spring getaway from Trondheim to Paris, perfect for couples seeking culture, food, and scenic strolls along the Seine.',
-  '2026-04-05', '2026-04-12', 8, 'Romance, Culture, Economy, City Experience', 3, 'parisTrip-01.webp'),
+  '2027-04-05', '2027-04-12', 8, 'Romance, Culture, Economy, City Experience', 3, 'parisTrip-01.webp'),
   (5005, 'Paris Weekend Escape Oslo -> Paris',
    'A charming early-summer trip from Oslo to Paris with museums, cafes, and river views.',
   '2026-06-10', '2026-06-17', 7, 'Culture, Weekend, Food, City Break', 3, 'parisTrip-02.webp'),
@@ -253,7 +226,7 @@ VALUES
   '2026-10-01', '2026-10-08', 7, 'Art, Architecture, City Break, Autumn', 3, 'parisTrip-03.webp'),
   (2031, 'Spring Explorer Trip Oslo -> Tokyo',
    'A cultural discovery trip from Oslo to Tokyo, perfect for travelers seeking food, history, and modern city life.',
-  '2026-04-02', '2026-04-12', 10, 'Adventure, Culture, Cherry Blossom, Budget-Friendly', 4, 'tokyoTrip-01.webp'),
+  '2027-04-02', '2027-04-12', 10, 'Adventure, Culture, Cherry Blossom, Budget-Friendly', 4, 'tokyoTrip-01.webp'),
   (5007, 'Tokyo Discovery Trip Bergen -> Tokyo',
    'A summer trip from Bergen to Tokyo combining technology, temples, and street food.',
   '2026-07-20', '2026-07-30', 10, 'Food, Culture, Adventure, Summer', 4, 'tokyoTrip-02.webp'),
@@ -262,7 +235,7 @@ VALUES
   '2026-11-10', '2026-11-20', 10, 'Food, Culture, Winter, City Experience', 4, 'tokyoTrip-03.webp'),
   (2032, 'City Lights Trip Bergen to New York',
    'A vibrant city adventure to New York, suitable for shopping, sightseeing, and food lovers.',
-  '2026-05-15', '2026-05-25', 10, 'Urban, Food, Shopping, Culture', 5, 'newyorkTrip-01.webp'),
+  '2027-05-15', '2027-05-25', 10, 'Urban, Food, Shopping, Culture', 5, 'newyorkTrip-01.webp'),
   (5009, 'New York Skyline Trip Oslo -> New York',
    'A classic big-city trip from Oslo to New York for museums, shopping, and iconic skyline views.',
   '2026-08-01', '2026-08-11', 10, 'Urban, Museums, Shopping, Summer', 5, 'newyorkTrip-02.webp'),
@@ -280,7 +253,7 @@ VALUES
   '2026-10-10', '2026-10-17', 7, 'Culture, Food, Museums, Autumn', 6, 'romeTrip-03.webp'),
   (2034, 'Arctic Adventure Tromsø to Reykjavik',
    'A scenic adventure trip ideal for nature lovers seeking geysers, waterfalls, and hot springs.',
-  '2026-03-20', '2026-03-27', 7, 'Arctic, Outdoors, Geothermal', 7, 'reykjavikTrip-01.webp'),
+  '2027-03-20', '2027-03-27', 7, 'Arctic, Outdoors, Geothermal', 7, 'reykjavikTrip-01.webp'),
   (5013, 'Reykjavik Northern Lights Trip Bergen -> Reykjavik',
    'A bright summer trip from Bergen to Reykjavik with nature, geothermal sights, and open landscapes.',
   '2026-06-15', '2026-06-22', 7, 'Nature, Outdoors, Geothermal, Summer', 7, 'reykjavikTrip-02.webp'),
@@ -292,7 +265,7 @@ VALUES
   '2026-09-10', '2026-09-17', 7, 'Music, Classical, Museum', 8, 'viennaTrip-01.webp'),
   (5015, 'Vienna Music Trip Trondheim -> Vienna',
    'A spring trip from Trondheim to Vienna for concerts, coffee houses, and elegant streets.',
-  '2026-04-20', '2026-04-27', 7, 'Music, Culture, City Break, Spring', 8, 'viennaTrip-02.webp'),
+  '2027-04-20', '2027-04-27', 7, 'Music, Culture, City Break, Spring', 8, 'viennaTrip-02.webp'),
   (5016, 'Vienna Winter Escape Oslo -> Vienna',
    'A winter trip from Oslo to Vienna for museums, festive markets, and classical charm.',
   '2026-12-10', '2026-12-17', 7, 'Classical, Museums, Winter, City Break', 8, 'viennaTrip-03.webp'),
@@ -310,16 +283,16 @@ VALUES
   '2026-10-18', '2026-10-24', 6, 'Culture, Budget, Weekend', 10, 'berlinTrip-01.webp'),
   (5019, 'Berlin Art Trip Trondheim -> Berlin',
    'A spring trip from Trondheim to Berlin focused on galleries, design, and urban culture.',
-  '2026-05-18', '2026-05-24', 6, 'Art, Culture, City Break, Spring', 10, 'berlinTrip-02.webp'),
+  '2027-05-18', '2027-05-24', 6, 'Art, Culture, City Break, Spring', 10, 'berlinTrip-02.webp'),
   (5020, 'Berlin Nightlife Trip Oslo -> Berlin',
    'A late-year trip from Oslo to Berlin for nightlife, food halls, and modern city life.',
   '2026-11-01', '2026-11-07', 6, 'Nightlife, Budget, Weekend, City Break', 10, 'berlinTrip-03.webp'),
   (2038, 'Cultural Escape Trondheim to Dublin',
    'A cozy trip filled with Irish pubs, history, and beautiful landscapes.',
-  '2026-03-12', '2026-03-19', 7, 'Music, History, Relaxed', 11, 'dublinTrip-01.webp'),
+  '2027-03-12', '2027-03-19', 7, 'Music, History, Relaxed', 11, 'dublinTrip-01.webp'),
   (5021, 'Dublin Pub Trail Trip Stavanger -> Dublin',
    'A spring trip from Stavanger to Dublin with live music, pubs, and a relaxed city pace.',
-  '2026-04-01', '2026-04-08', 7, 'Pubs, Music, Culture, Spring', 11, 'dublinTrip-02.webp'),
+  '2027-04-01', '2027-04-08', 7, 'Pubs, Music, Culture, Spring', 11, 'dublinTrip-02.webp'),
   (5022, 'Dublin Heritage Trip Bergen -> Dublin',
    'A late-summer Dublin break from Bergen with history, green parks, and river walks.',
   '2026-09-15', '2026-09-22', 7, 'History, Relaxed, City Break, Summer', 11, 'dublinTrip-03.webp'),
@@ -328,7 +301,7 @@ VALUES
   '2026-11-03', '2026-11-17', 14, 'Safari, Beaches, Hiking', 12, 'capetownTrip-01.webp'),
   (5023, 'Cape Town Safari Trip Trondheim -> Cape Town',
    'A summer adventure from Trondheim to Cape Town with wildlife, hikes, and coastal views.',
-  '2026-01-10', '2026-01-24', 14, 'Safari, Hiking, Beaches, Summer', 12, 'capetownTrip-02.webp'),
+  '2027-01-10', '2027-01-24', 14, 'Safari, Hiking, Beaches, Summer', 12, 'capetownTrip-02.webp'),
   (5024, 'Cape Town Coast Trip Bergen -> Cape Town',
    'A festive season Cape Town trip from Bergen for mountain scenery, beaches, and local food.',
   '2026-12-01', '2026-12-15', 14, 'Safari, Coast, Hiking, Holiday', 12, 'capetownTrip-03.webp');
