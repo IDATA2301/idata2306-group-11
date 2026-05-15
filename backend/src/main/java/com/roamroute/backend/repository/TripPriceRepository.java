@@ -12,4 +12,7 @@ public interface TripPriceRepository extends JpaRepository<TripPrice, Integer> {
 
   Optional<TripPrice> findByTrip_idAndFlight_id(int tripId, int flightId);
   Optional<TripPrice> findByTrip_idAndAccommodation_id(int tripId, int accommodation);
+
+  long countByFlight_Id(int flightId);
+  long countByAccommodation_Id(int accommodationId);
 }
