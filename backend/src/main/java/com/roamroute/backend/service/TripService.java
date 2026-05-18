@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import com.roamroute.backend.dto.TripDetailsDTO;
 import com.roamroute.backend.dto.TripHomeDTO;
@@ -13,6 +15,7 @@ import com.roamroute.backend.dto.UpdateTripRequest;
 import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.repository.TripPriceRepository;
 import com.roamroute.backend.repository.TripRepository;
+
 
 @Service
 public class TripService {
@@ -33,7 +36,10 @@ public class TripService {
     }
 
     public TripDetailsDTO getTripDetails(int id) {
-        Trip trip = tripRepository.findById(id).orElseThrow();
+        Trip trip = tripRepository.findById(id).orElseThrow(() ->
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found")
+        );
+    
         
         String flightDuration = tripPriceRepository
             .findByTrip_IdAndFlightIsNotNull(id)
