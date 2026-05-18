@@ -1,9 +1,11 @@
 package com.roamroute.backend.controller;
 
+import com.roamroute.backend.repository.AccommodationRepository;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.roamroute.backend.entity.Accommodation;
 import com.roamroute.backend.entity.Flight;
@@ -28,6 +31,7 @@ import com.roamroute.backend.dto.CreateOrderRequest;
 @RequestMapping("/api/orders")
 public class OrderController {
 
+  private final AccommodationRepository accommodationRepository;
   private final OrderRepository orderRepository;
   private final UserRepository userRepository;
   private final TripRepository tripRepository;
@@ -37,16 +41,21 @@ public class OrderController {
     OrderRepository orderRepository,
     UserRepository userRepository,
     TripRepository tripRepository,
-    TripPriceRepository tripPriceRepository
+    TripPriceRepository tripPriceRepository, AccommodationRepository accommodationRepository
   ) {
     this.orderRepository = orderRepository;
     this.userRepository = userRepository;
     this.tripRepository = tripRepository;
     this.tripPriceRepository = tripPriceRepository;
+    this.accommodationRepository = accommodationRepository;
   }
 
   @PostMapping
   public Order createOrder(@RequestBody CreateOrderRequest req, Authentication auth) {
+
+    if (auth == null || !auth.isAuthenticated()) {
+      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User must be authenticated to place an order");
+    }
     System.out.println("=== DEBUG START ===");
     System.out.println("AUTH OBJECT: " + auth);
     System.out.println("EMAIL FROM TOKEN: " + (auth != null ? auth.getName() : "null"));
