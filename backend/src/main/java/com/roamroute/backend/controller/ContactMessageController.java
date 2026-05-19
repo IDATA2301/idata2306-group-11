@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.roamroute.backend.entity.ContactMessage;
 import com.roamroute.backend.repository.ContactMessageRepository;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+
 @RestController
 @RequestMapping("/api/contact")
 public class ContactMessageController {
@@ -27,6 +29,7 @@ public class ContactMessageController {
   }
 
   @PostMapping
+  @SecurityRequirements
   public ContactMessage createContactMessage(@RequestBody ContactMessage contactMessage) {
     return contactMessageRepository.save(contactMessage);
   }

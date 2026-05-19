@@ -16,6 +16,7 @@ import com.roamroute.backend.dto.UpdateUsernameRequest;
 import com.roamroute.backend.entity.User;
 import com.roamroute.backend.repository.UserRepository;
 import com.roamroute.backend.service.JwtService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +43,7 @@ public class AuthController {
   }
 
   @PostMapping("/register")
+  @SecurityRequirements
   @org.springframework.web.bind.annotation.ResponseStatus(HttpStatus.CREATED)
   public LoginResponse register(@RequestBody RegisterRequest request) {
     if (!StringUtils.hasText(request.getFullName())
@@ -83,6 +85,7 @@ public class AuthController {
   }
 
   @PostMapping("/login")
+  @SecurityRequirements
   public LoginResponse login(@RequestBody LoginRequest request) {
     if (!StringUtils.hasText(request.getEmail()) || !StringUtils.hasText(request.getPassword())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email and password are required");

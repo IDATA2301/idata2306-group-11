@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.roamroute.backend.entity.Destination;
 import com.roamroute.backend.repository.DestinationRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/destinations")
+@SecurityRequirements
 public class DestinationController {
 
   private final DestinationRepository destinationRepository;

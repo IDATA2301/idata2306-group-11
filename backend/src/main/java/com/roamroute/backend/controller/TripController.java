@@ -12,8 +12,11 @@ import com.roamroute.backend.dto.TripDetailsDTO;
 import com.roamroute.backend.dto.TripHomeDTO;
 import com.roamroute.backend.service.TripService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+
 @RestController
 @RequestMapping("/api/trips")
+@SecurityRequirements
 public class TripController {
 
     private final TripService tripService;
