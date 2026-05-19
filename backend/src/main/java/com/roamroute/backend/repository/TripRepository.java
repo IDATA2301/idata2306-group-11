@@ -22,23 +22,28 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
       LEFT JOIN TripPrice tp ON tp.trip = t
       LEFT JOIN tp.flight f
       LEFT JOIN tp.accommodation a
-      WHERE LOWER(COALESCE(t.title, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(t.trip_description, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(t.keywords, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(d.city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(d.country, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(f.airline, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(f.departure_city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(f.destination_city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(f.departure_airport, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(f.destination_airport, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(a.hotel_name, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(a.hotel_type, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(a.hotel_city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(a.hotel_location, '')) LIKE LOWER(CONCAT('%', :query, '%'))
-         OR LOWER(COALESCE(a.amenities, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+      WHERE t.active = true
+      AND (
+        LOWER(COALESCE(t.title, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(t.trip_description, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(t.keywords, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(d.city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(d.country, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(f.airline, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(f.departure_city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(f.destination_city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(f.departure_airport, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(f.destination_airport, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(a.hotel_name, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(a.hotel_type, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(a.hotel_city, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(a.hotel_location, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+        OR LOWER(COALESCE(a.amenities, '')) LIKE LOWER(CONCAT('%', :query, '%'))
+      )
       ORDER BY t.start_date ASC
       """)
-  List<Trip> searchTrips(@Param("query") String query);
+  List<Trip> searchActiveTrips(@Param("query") String query);
+
+  List<Trip> findByActiveTrue();
 
 }
