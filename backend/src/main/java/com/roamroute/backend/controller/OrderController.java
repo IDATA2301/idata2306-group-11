@@ -94,8 +94,22 @@ public class OrderController {
   }
 
   @GetMapping("/{id}")
-  public Order getOrderById(@PathVariable int id) {
-    return orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+  public Order getOrderById(@PathVariable int id, Authentication auth) {
+    User user = userRepository.findByEmail(auth.getName())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
+
+    Order order = orderRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
+
+    boolean isOwner = order.getUser() != null && order.getUser().getId() == user.getId();
+    boolean isAdmin = auth.getAuthorities().stream()
+        .anyMatch(a -> "ROLE_ADMIN".equals(a.getAuthority()));
+
+    if (!isOwner && !isAdmin) {
+      throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not allowed to view this order");
+    }
+
+    return order;
   }
 
 }
