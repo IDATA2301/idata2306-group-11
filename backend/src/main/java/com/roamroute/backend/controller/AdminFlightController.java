@@ -16,8 +16,12 @@ import com.roamroute.backend.dto.FlightDTO;
 import com.roamroute.backend.dto.FlightRequest;
 import com.roamroute.backend.service.FlightService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/admin/flights")
+@Tag(name = "Admin / Flights", description = "Manage flights catalog")
 public class AdminFlightController {
 
   private final FlightService flightService;
@@ -27,26 +31,31 @@ public class AdminFlightController {
   }
 
   @GetMapping
+  @Operation(summary = "List all flights")
   public List<FlightDTO> list() {
     return flightService.list();
   }
 
   @GetMapping("/{id}")
+  @Operation(summary = "Get a single flight by ID")
   public FlightDTO get(@PathVariable int id) {
     return flightService.get(id);
   }
 
   @PostMapping
+  @Operation(summary = "Create a new flight")
   public FlightDTO create(@RequestBody FlightRequest request) {
     return flightService.create(request);
   }
 
   @PutMapping("/{id}")
+  @Operation(summary = "Update an existing flight")
   public FlightDTO update(@PathVariable int id, @RequestBody FlightRequest request) {
     return flightService.update(id, request);
   }
 
   @DeleteMapping("/{id}")
+  @Operation(summary = "Delete a flight")
   public ResponseEntity<Void> delete(@PathVariable int id) {
     flightService.delete(id);
     return ResponseEntity.noContent().build();

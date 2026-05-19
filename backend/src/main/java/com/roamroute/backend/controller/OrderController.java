@@ -27,8 +27,12 @@ import com.roamroute.backend.repository.TripRepository;
 import com.roamroute.backend.repository.UserRepository;
 import com.roamroute.backend.dto.CreateOrderRequest;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/orders")
+@Tag(name = "Orders", description = "Order placement and retrieval for the authenticated user")
 public class OrderController {
 
   private final AccommodationRepository accommodationRepository;
@@ -51,6 +55,7 @@ public class OrderController {
   }
 
   @PostMapping
+  @Operation(summary = "Place a new order for the authenticated user")
   public Order createOrder(@RequestBody CreateOrderRequest req, Authentication auth) {
 
     if (auth == null || !auth.isAuthenticated()) {
@@ -88,12 +93,14 @@ public class OrderController {
   }
 
   @GetMapping
+  @Operation(summary = "List orders belonging to the authenticated user")
   public List<Order> getUserOrders(Authentication auth) {
     User user = userRepository.findByEmail(auth.getName()).orElseThrow(() -> new RuntimeException("User not found"));
     return orderRepository.findByUser(user);
   }
 
   @GetMapping("/{id}")
+  @Operation(summary = "Get a single order (owner or admin only)")
   public Order getOrderById(@PathVariable int id, Authentication auth) {
     User user = userRepository.findByEmail(auth.getName())
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));

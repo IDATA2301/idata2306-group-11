@@ -16,8 +16,12 @@ import com.roamroute.backend.dto.AccommodationDTO;
 import com.roamroute.backend.dto.AccommodationRequest;
 import com.roamroute.backend.service.AccommodationService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/admin/accommodations")
+@Tag(name = "Admin / Accommodations", description = "Manage accommodations catalog")
 public class AdminAccommodationController {
 
   private final AccommodationService accommodationService;
@@ -27,26 +31,31 @@ public class AdminAccommodationController {
   }
 
   @GetMapping
+  @Operation(summary = "List all accommodations")
   public List<AccommodationDTO> list() {
     return accommodationService.list();
   }
 
   @GetMapping("/{id}")
+  @Operation(summary = "Get a single accommodation by ID")
   public AccommodationDTO get(@PathVariable int id) {
     return accommodationService.get(id);
   }
 
   @PostMapping
+  @Operation(summary = "Create a new accommodation")
   public AccommodationDTO create(@RequestBody AccommodationRequest request) {
     return accommodationService.create(request);
   }
 
   @PutMapping("/{id}")
+  @Operation(summary = "Update an existing accommodation")
   public AccommodationDTO update(@PathVariable int id, @RequestBody AccommodationRequest request) {
     return accommodationService.update(id, request);
   }
 
   @DeleteMapping("/{id}")
+  @Operation(summary = "Delete an accommodation")
   public ResponseEntity<Void> delete(@PathVariable int id) {
     accommodationService.delete(id);
     return ResponseEntity.noContent().build();
