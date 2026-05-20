@@ -106,6 +106,8 @@ public class TripService {
         String destinationImageUrl = destination != null ? destination.getImage_url() : null;
         String destinationImageAlt = destination != null ? destination.getImage_alt() : null;
 
+        boolean active = trip.isActive();
+
         return new TripDetailsDTO(
             trip.getId(),
             trip.getTitle(),
@@ -130,7 +132,8 @@ public class TripService {
             amenities,
             nights,
             latitude,
-            longitude
+            longitude,
+            active
         );
     }
 
@@ -165,8 +168,8 @@ public class TripService {
         String normalizedQuery = query == null ? "" : query.trim();
 
         List<Trip> trips = normalizedQuery.isEmpty()
-            ? tripRepository.findAll()
-            : tripRepository.searchTrips(normalizedQuery);
+            ? tripRepository.findByActiveTrue()
+            : tripRepository.searchActiveTrips(normalizedQuery);
 
         return trips.stream()
             .filter(t -> destinationId == null
@@ -195,6 +198,8 @@ public class TripService {
         Date startDate = trip.getStart_date();
         Date endDate = trip.getEnd_date();
 
+        boolean active = trip.isActive();
+
         return new TripHomeDTO(
             trip.getId(),
             trip.getTitle(),
@@ -203,7 +208,14 @@ public class TripService {
             trip.getDestination().getCountry(),
             lowestFlight + lowestHotel,
             startDate,
-            endDate
+            endDate,
+            active
         );
+    }
+
+    public List<TripHomeDTO> getAllTripsForAdmin() {
+        return tripRepository.findAll().stream()
+            .map(this::toTripHomeDTO)
+            .toList();
     }
 }

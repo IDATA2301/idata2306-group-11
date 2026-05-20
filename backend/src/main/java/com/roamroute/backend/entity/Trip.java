@@ -2,6 +2,7 @@ package com.roamroute.backend.entity;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -30,6 +31,9 @@ public class Trip {
 	private Destination destination;
 
 	private String image_url;
+
+	@Column(nullable = false)
+	private boolean active = true;
 
 	public int getId() {
 		return id;
@@ -67,6 +71,10 @@ public class Trip {
 		return end_date;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
 	public void setEnd_date(Date end_date) {
 		this.end_date = end_date;
 	}
@@ -93,6 +101,10 @@ public class Trip {
 
 	public void setImage_url(String image_url) {
 		this.image_url = image_url;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

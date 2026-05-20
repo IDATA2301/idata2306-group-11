@@ -48,6 +48,7 @@ Table trips {
   keywords text
   destination_id int 
   image_url varchar 
+  active boolean
 }
 
 Table tripprices {

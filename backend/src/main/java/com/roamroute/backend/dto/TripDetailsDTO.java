@@ -28,6 +28,7 @@ public class TripDetailsDTO {
     private int nights;
     private double latitude;
     private double longitude;
+    private boolean active;
 
     public TripDetailsDTO(int id, String title, String description,
                           String imageUrl, Integer destinationId, String city, String country,
@@ -36,7 +37,7 @@ public class TripDetailsDTO {
                           String flightDuration, List<TripPriceDTO> flightOptions, List<TripPriceDTO> hotelOptions,
                           String departureAirport, String arrivalAirport, List<String> keywords,
                           String hotelName, String hotelType, String hotelLocation, String amenities, int nights,
-                          double latitude, double longitude) {
+                          double latitude, double longitude, boolean active) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -61,6 +62,7 @@ public class TripDetailsDTO {
         this.nights = nights;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.active = active;
     }
 
     public Integer getDestinationId() {
@@ -157,5 +159,9 @@ public class TripDetailsDTO {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }

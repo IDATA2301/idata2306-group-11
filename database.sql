@@ -57,6 +57,7 @@ CREATE TABLE trips (
   keywords TEXT,
   destination_id INT,
   image_url VARCHAR(500),
+  active BOOLEAN DEFAULT TRUE,
   FOREIGN KEY (destination_id) REFERENCES destinations(id)
 );
 
