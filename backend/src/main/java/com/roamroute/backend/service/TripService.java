@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 
+import com.roamroute.backend.dto.CreateTripRequest;
 import com.roamroute.backend.dto.TripDetailsDTO;
 import com.roamroute.backend.dto.TripHomeDTO;
 import com.roamroute.backend.dto.TripPriceDTO;
 import com.roamroute.backend.dto.UpdateTripRequest;
+import com.roamroute.backend.entity.Destination;
 import com.roamroute.backend.entity.Trip;
+import com.roamroute.backend.repository.DestinationRepository;
 import com.roamroute.backend.repository.TripPriceRepository;
 import com.roamroute.backend.repository.TripRepository;
 
@@ -22,11 +25,14 @@ public class TripService {
 
     private final TripRepository tripRepository;
     private final TripPriceRepository tripPriceRepository;
+    private final DestinationRepository destinationRepository;
 
     public TripService(TripRepository tripRepository,
-                       TripPriceRepository tripPriceRepository) {
+                       TripPriceRepository tripPriceRepository,
+                       DestinationRepository destinationRepository) {
         this.tripRepository = tripRepository;
         this.tripPriceRepository = tripPriceRepository;
+        this.destinationRepository = destinationRepository;
     }
 
     public List<TripHomeDTO> getHomeTrips() {
@@ -135,6 +141,30 @@ public class TripService {
             longitude,
             active
         );
+    }
+
+    public TripDetailsDTO createTrip(CreateTripRequest request) {
+        int nextId = tripRepository.findMaxId() + 1;
+
+        Destination destination = null;
+        if (request.getDestinationId() != null) {
+            destination = destinationRepository.findById(request.getDestinationId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Destination not found"));
+        }
+
+        Trip trip = new Trip();
+        trip.setId(nextId);
+        trip.setTitle(request.getTitle());
+        trip.setTrip_description(request.getDescription());
+        trip.setImage_url(request.getImageUrl());
+        trip.setStart_date(request.getStartDate() != null ? Date.valueOf(request.getStartDate()) : null);
+        trip.setEnd_date(request.getEndDate() != null ? Date.valueOf(request.getEndDate()) : null);
+        trip.setKeywords(request.getKeywords() != null ? String.join(",", request.getKeywords()) : null);
+        trip.setDestination(destination);
+        trip.setActive(true);
+
+        tripRepository.save(trip);
+        return getTripDetails(nextId);
     }
 
     public TripDetailsDTO updateTrip(int id, UpdateTripRequest request) {
