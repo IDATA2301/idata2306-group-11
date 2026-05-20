@@ -42,15 +42,25 @@ public class AdminTripController {
     return tripService.createTrip(request);
   }
 
+
+	@GetMapping
+	public List<TripHomeDTO> getAllTripsForAdmin() {
+		return tripService.getAllTripsForAdmin();
+	}
+
+	@PatchMapping("/{id}/toggle")
+	public Trip toggleTrip(@PathVariable int id) {
+		Trip trip = tripRepository.findById(id)
+			.orElseThrow(() -> 
+				new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found"));
+  } 
+  
+    
   @PutMapping("/{id}")
   public TripDetailsDTO updateTrip(@PathVariable int id, @RequestBody UpdateTripRequest request) {
     return tripService.updateTrip(id, request);
   }
 
-  @GetMapping
-  public List<TripHomeDTO> getAllTripsForAdmin() {
-    return tripService.getAllTripsForAdmin();
-  }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteTrip(@PathVariable int id) {
