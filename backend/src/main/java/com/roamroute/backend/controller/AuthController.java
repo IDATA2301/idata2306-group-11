@@ -3,6 +3,7 @@ package com.roamroute.backend.controller;
 import java.text.Normalizer;
 
 import org.springframework.http.HttpStatus;
+import java.util.Map;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.roamroute.backend.dto.UpdateUsernameRequest;
 import com.roamroute.backend.entity.User;
 import com.roamroute.backend.repository.UserRepository;
 import com.roamroute.backend.service.JwtService;
+import com.roamroute.backend.service.EmailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.UUID;
 
 
 @RestController
@@ -38,11 +42,13 @@ public class AuthController {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
+  private final EmailService emailService;
 
-  public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+  public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, EmailService emailService) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.jwtService = jwtService;
+    this.emailService = emailService;
   }
 
   @PostMapping("/register")
@@ -114,6 +120,64 @@ public class AuthController {
       token
     );
 
+  }
+
+      @PostMapping("/forgot-password")
+      public void forgotPassword(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        
+        if (!StringUtils.hasText(email)) {
+          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is required");
+        }
+
+        User user = userRepository.findByEmail(email.trim().toLowerCase()).orElse(null);
+        if (user == null) {
+          // Deliberately return success-like response to avoid exposing which emails exist.
+          return;
+        }
+
+        // Generate reset token
+        String resetToken = UUID.randomUUID().toString();
+        long expiryTime = System.currentTimeMillis() + (3600 * 1000); // 1 hour
+
+        // Save token to user
+        user.setPasswordResetToken(resetToken);
+        user.setPasswordResetTokenExpiry(expiryTime);
+        userRepository.save(user);
+
+        // Send email with reset link
+        String resetUrl = "http://localhost:5173/reset-password?token=" + resetToken;
+        try {
+          emailService.sendPasswordResetEmail(user.getEmail(), resetToken, resetUrl)
+            .block();
+        } catch (Exception e) {
+          System.err.println("Forgot-password email send failed for user id " + user.getId() + ": " + e.getMessage());
+          // Do not fail the endpoint response. Frontend should still show generic success message.
+        }
+      }
+
+  @PostMapping("/reset-password")
+  public void resetPassword(@RequestBody Map<String, String> request) {
+    String token = request.get("token");
+    String newPassword = request.get("password");
+
+    if (!StringUtils.hasText(token) || !StringUtils.hasText(newPassword)) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Token and password are required");
+    }
+
+    User user = userRepository.findAll().stream()
+      .filter(candidate -> token.equals(candidate.getPasswordResetToken()))
+      .findFirst()
+      .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reset token is invalid or has expired"));
+
+    if (user.getPasswordResetTokenExpiry() == null || user.getPasswordResetTokenExpiry() < System.currentTimeMillis()) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Reset token is invalid or has expired");
+    }
+
+    user.setUser_password(passwordEncoder.encode(newPassword));
+    user.setPasswordResetToken(null);
+    user.setPasswordResetTokenExpiry(null);
+    userRepository.save(user);
   }
 
   @PutMapping("/profile/{id}/username")

@@ -32,13 +32,16 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
         // Public endpoints
-        .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll()
+        .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
         .requestMatchers(HttpMethod.GET, "/api/trips/**").permitAll()
         .requestMatchers(HttpMethod.GET, "/api/destinations/**").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/contact").permitAll()
 
         // API documentation
         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+
+        // Error handling
+        .requestMatchers("/error", "/error/**").permitAll()
 
         // Admin only
         .requestMatchers("/api/admin/**").hasRole("ADMIN")

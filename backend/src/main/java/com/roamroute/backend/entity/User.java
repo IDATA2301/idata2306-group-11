@@ -31,6 +31,12 @@ public class User {
 
   private String user_country;
 
+  @Column(name = "password_reset_token")
+  private String passwordResetToken;
+
+  @Column(name = "password_reset_token_expiry")
+  private Long passwordResetTokenExpiry;
+
   public int getId() {
     return id;
   }
@@ -93,6 +99,22 @@ public class User {
 
   public void setUser_country(String user_country) {
     this.user_country = user_country;
+  }
+
+  public String getPasswordResetToken() {
+    return passwordResetToken;
+  }
+
+  public void setPasswordResetToken(String passwordResetToken) {
+    this.passwordResetToken = passwordResetToken;
+  }
+
+  public Long getPasswordResetTokenExpiry() {
+    return passwordResetTokenExpiry;
+  }
+
+  public void setPasswordResetTokenExpiry(Long passwordResetTokenExpiry) {
+    this.passwordResetTokenExpiry = passwordResetTokenExpiry;
   }
 
 }
