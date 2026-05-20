@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,6 +29,13 @@ public class ContactMessage {
   private String contactmessage_message;
 
   private Date created_at;
+
+  @PrePersist
+  protected void onCreate() {
+    if (created_at == null) {
+      created_at = new Date(System.currentTimeMillis());
+    }
+  }
 
   public int getId() {
     return id;
