@@ -16,9 +16,12 @@ import com.roamroute.backend.dto.UpdateTripRequest;
 import com.roamroute.backend.entity.Destination;
 import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.repository.DestinationRepository;
+import com.roamroute.backend.repository.OrderRepository;
+import com.roamroute.backend.repository.SelectedPackageRepository;
 import com.roamroute.backend.repository.TripPriceRepository;
 import com.roamroute.backend.repository.TripRepository;
 
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TripService {
@@ -26,13 +29,19 @@ public class TripService {
     private final TripRepository tripRepository;
     private final TripPriceRepository tripPriceRepository;
     private final DestinationRepository destinationRepository;
+    private final OrderRepository orderRepository;
+    private final SelectedPackageRepository selectedPackageRepository;
 
     public TripService(TripRepository tripRepository,
                        TripPriceRepository tripPriceRepository,
-                       DestinationRepository destinationRepository) {
+                       DestinationRepository destinationRepository,
+                       OrderRepository orderRepository,
+                       SelectedPackageRepository selectedPackageRepository) {
         this.tripRepository = tripRepository;
         this.tripPriceRepository = tripPriceRepository;
         this.destinationRepository = destinationRepository;
+        this.orderRepository = orderRepository;
+        this.selectedPackageRepository = selectedPackageRepository;
     }
 
     public List<TripHomeDTO> getHomeTrips() {
@@ -247,5 +256,19 @@ public class TripService {
         return tripRepository.findAll().stream()
             .map(this::toTripHomeDTO)
             .toList();
+    }
+
+    @Transactional
+    public void deleteTrip(int id) {
+        if (!tripRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found");
+        }
+        if (orderRepository.existsByTrip_Id(id)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                "Cannot delete a trip that has existing orders");
+        }
+        selectedPackageRepository.deleteByTrip_Id(id);
+        tripPriceRepository.deleteByTrip_Id(id);
+        tripRepository.deleteById(id);
     }
 }

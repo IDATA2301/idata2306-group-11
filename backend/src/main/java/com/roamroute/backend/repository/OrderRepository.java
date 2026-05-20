@@ -12,4 +12,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
   List<Order> findByUser(User user);
 
   List<Order> findByUser_Id(int userId);
+
+  boolean existsByTrip_Id(int tripId);
 }

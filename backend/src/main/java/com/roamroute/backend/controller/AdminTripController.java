@@ -3,6 +3,8 @@ package com.roamroute.backend.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +50,12 @@ public class AdminTripController {
   @GetMapping
   public List<TripHomeDTO> getAllTripsForAdmin() {
     return tripService.getAllTripsForAdmin();
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteTrip(@PathVariable int id) {
+    tripService.deleteTrip(id);
+    return ResponseEntity.noContent().build();
   }
 
   @PatchMapping("/{id}/toggle")
