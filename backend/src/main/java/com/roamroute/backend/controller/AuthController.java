@@ -16,6 +16,9 @@ import com.roamroute.backend.dto.UpdateUsernameRequest;
 import com.roamroute.backend.entity.User;
 import com.roamroute.backend.repository.UserRepository;
 import com.roamroute.backend.service.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Auth", description = "User registration, login and profile management")
 public class AuthController {
 
   private static final int MIN_USERNAME_LENGTH = 6;
@@ -42,6 +46,8 @@ public class AuthController {
   }
 
   @PostMapping("/register")
+  @SecurityRequirements
+  @Operation(summary = "Register a new user account and return a JWT")
   @org.springframework.web.bind.annotation.ResponseStatus(HttpStatus.CREATED)
   public LoginResponse register(@RequestBody RegisterRequest request) {
     if (!StringUtils.hasText(request.getFullName())
@@ -83,6 +89,8 @@ public class AuthController {
   }
 
   @PostMapping("/login")
+  @SecurityRequirements
+  @Operation(summary = "Authenticate with email + password and receive a JWT")
   public LoginResponse login(@RequestBody LoginRequest request) {
     if (!StringUtils.hasText(request.getEmail()) || !StringUtils.hasText(request.getPassword())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email and password are required");
@@ -109,6 +117,7 @@ public class AuthController {
   }
 
   @PutMapping("/profile/{id}/username")
+  @Operation(summary = "Update the username of the authenticated user")
   public LoginResponse updateUsername(@PathVariable int id, @RequestBody UpdateUsernameRequest request) {
     if (!StringUtils.hasText(request.getUserName())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is required");

@@ -19,8 +19,12 @@ import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.repository.TripRepository;
 import com.roamroute.backend.service.TripService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/admin/trips")
+@Tag(name = "Admin / Trips", description = "Manage trips")
 public class AdminTripController {
 
   private final TripService tripService;
@@ -50,5 +54,12 @@ public class AdminTripController {
 		trip.setActive(!trip.isActive());
 		return tripRepository.save(trip);
 	}
+
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update an existing trip")
+    public TripDetailsDTO updateTrip(@PathVariable int id, @RequestBody UpdateTripRequest request) {
+        return tripService.updateTrip(id, request);
+    }
 
 }

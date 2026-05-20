@@ -11,8 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.roamroute.backend.service.ImageStorageService;
 import com.roamroute.backend.service.ImageStorageService.Category;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/admin/uploads")
+@Tag(name = "Admin / Uploads", description = "Image uploads for trips and destinations")
 public class AdminUploadController {
 
   private final ImageStorageService imageStorageService;
@@ -22,6 +26,7 @@ public class AdminUploadController {
   }
 
   @PostMapping("/trip-image")
+  @Operation(summary = "Upload an image for a trip and return the stored filename")
   public Map<String, String> uploadTripImage(@RequestParam("file") MultipartFile file,
                                              @RequestParam(value = "filename", required = false) String filename) {
     String saved = imageStorageService.store(file, Category.TRIP, filename);
@@ -29,6 +34,7 @@ public class AdminUploadController {
   }
 
   @PostMapping("/destination-image")
+  @Operation(summary = "Upload an image for a destination and return the stored filename")
   public Map<String, String> uploadDestinationImage(@RequestParam("file") MultipartFile file,
                                                     @RequestParam(value = "filename", required = false) String filename) {
     String saved = imageStorageService.store(file, Category.DESTINATION, filename);

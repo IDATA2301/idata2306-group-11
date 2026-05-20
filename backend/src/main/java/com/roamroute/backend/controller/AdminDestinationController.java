@@ -20,8 +20,12 @@ import com.roamroute.backend.entity.Destination;
 import com.roamroute.backend.repository.DestinationRepository;
 import com.roamroute.backend.repository.TripRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/admin/destinations")
+@Tag(name = "Admin / Destinations", description = "Manage destinations catalog")
 public class AdminDestinationController {
 
   private final DestinationRepository destinationRepository;
@@ -34,16 +38,19 @@ public class AdminDestinationController {
   }
 
   @GetMapping
+  @Operation(summary = "List all destinations (admin)")
   public List<DestinationDTO> list() {
     return destinationRepository.findAll().stream().map(this::toDTO).toList();
   }
 
   @GetMapping("/{id}")
+  @Operation(summary = "Get a single destination by ID (admin)")
   public DestinationDTO get(@PathVariable int id) {
     return toDTO(require(id));
   }
 
   @PostMapping
+  @Operation(summary = "Create a new destination")
   public DestinationDTO create(@RequestBody UpdateDestinationRequest request) {
     Destination destination = new Destination();
     apply(destination, request);
@@ -51,6 +58,7 @@ public class AdminDestinationController {
   }
 
   @PutMapping("/{id}")
+  @Operation(summary = "Update an existing destination")
   public DestinationDTO update(@PathVariable int id, @RequestBody UpdateDestinationRequest request) {
     Destination destination = require(id);
     apply(destination, request);
@@ -58,6 +66,7 @@ public class AdminDestinationController {
   }
 
   @DeleteMapping("/{id}")
+  @Operation(summary = "Delete a destination (rejected if used by any trip)")
   public ResponseEntity<Void> delete(@PathVariable int id) {
     Destination destination = require(id);
     boolean inUse = tripRepository.findAll().stream()
