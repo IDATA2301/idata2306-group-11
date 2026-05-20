@@ -18,8 +18,10 @@ public class ContactMessage {
   private int id;
 
   @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
+  @JoinColumn(name = "user_id", nullable = true)
   private User user;
+
+  private String senderEmail;
 
   private String contactmessage_subject;
 
@@ -43,6 +45,14 @@ public class ContactMessage {
     this.user = user;
   }
   
+  public String getSenderEmail() {
+    return senderEmail;
+  }
+
+  public void setSenderEmail(String senderEmail) {
+    this.senderEmail = senderEmail;
+  }
+
   public String getContactmessage_subject() {
     return contactmessage_subject;
   }
