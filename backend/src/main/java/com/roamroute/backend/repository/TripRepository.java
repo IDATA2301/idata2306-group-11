@@ -11,7 +11,8 @@ import com.roamroute.backend.entity.Trip;
 
 public interface TripRepository extends JpaRepository<Trip, Integer> {
 
-  List<Trip> findTop3ByOrderByIdAsc();
+  @Query(value = "SELECT * FROM trips WHERE active = true ORDER BY RAND() LIMIT 3", nativeQuery = true)
+  List<Trip> find3RandomActive();
   
   Optional<Trip> findById(int id);
 
