@@ -2,7 +2,10 @@ package com.roamroute.backend.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +60,16 @@ public class ContactMessageController {
     }
 
     return saved;
+  }
+
+  @DeleteMapping("/{id}")
+  @Operation(summary = "Delete a contact message (admin)")
+  public ResponseEntity<Void> deleteContactMessage(@PathVariable int id) {
+    if (!contactMessageRepository.existsById(id)) {
+      return ResponseEntity.notFound().build();
+    }
+    contactMessageRepository.deleteById(id);
+    return ResponseEntity.noContent().build();
   }
 
 }

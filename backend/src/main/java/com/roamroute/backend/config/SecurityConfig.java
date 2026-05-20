@@ -45,7 +45,8 @@ public class SecurityConfig {
 
         // Admin only
         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-        .requestMatchers(HttpMethod.GET, "/api/contact/**").hasRole("ADMIN")
+        .requestMatchers(HttpMethod.GET, "/api/contact", "/api/contact/**").hasRole("ADMIN")
+        .requestMatchers(HttpMethod.DELETE, "/api/contact/**").hasRole("ADMIN")
 
         // Authenticated endpoints
         .requestMatchers("/api/orders/**").authenticated()
