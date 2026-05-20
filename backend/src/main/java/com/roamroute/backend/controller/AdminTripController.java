@@ -35,11 +35,6 @@ public class AdminTripController {
 		this.tripRepository = tripRepository;
   }
 
-  @PutMapping("/{id}")
-  public TripDetailsDTO updateTrip(@PathVariable int id, @RequestBody UpdateTripRequest request) {
-    return tripService.updateTrip(id, request);
-  }
-
 	@GetMapping
 	public List<TripHomeDTO> getAllTripsForAdmin() {
 		return tripService.getAllTripsForAdmin();
