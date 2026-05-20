@@ -45,7 +45,7 @@ public class TripService {
     }
 
     public List<TripHomeDTO> getHomeTrips() {
-        return tripRepository.findTop3ByOrderByIdAsc().stream()
+        return tripRepository.find3RandomActive().stream()
             .map(this::toTripHomeDTO)
             .toList();
     }
@@ -54,8 +54,11 @@ public class TripService {
         Trip trip = tripRepository.findById(id).orElseThrow(() ->
             new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found")
         );
-    
-        
+
+        if (!trip.isActive()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found");
+        }
+
         String flightDuration = tripPriceRepository
             .findByTrip_IdAndFlightIsNotNull(id)
             .stream()
