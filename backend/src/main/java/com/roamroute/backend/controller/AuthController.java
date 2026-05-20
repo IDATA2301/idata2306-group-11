@@ -21,6 +21,7 @@ import com.roamroute.backend.service.EmailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,11 +44,13 @@ public class AuthController {
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final EmailService emailService;
+  private final String frontendUrl;
 
-  public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, EmailService emailService) {
+  public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, EmailService emailService, @Value("${app.frontend.url}") String frontendUrl) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.jwtService = jwtService;
+    this.frontendUrl = frontendUrl;
     this.emailService = emailService;
   }
 
@@ -146,7 +149,7 @@ public class AuthController {
         userRepository.save(user);
 
         // Send email with reset link
-        String resetUrl = "http://localhost:5173/reset-password?token=" + resetToken;
+        String resetUrl = frontendUrl + "/reset-password?token=" + resetToken;
         try {
           emailService.sendPasswordResetEmail(user.getEmail(), resetToken, resetUrl)
             .block();
