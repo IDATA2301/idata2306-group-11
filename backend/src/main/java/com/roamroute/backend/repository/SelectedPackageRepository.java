@@ -9,4 +9,6 @@ public interface SelectedPackageRepository extends JpaRepository<SelectedPackage
   long countByFlightTripPrice_Id(int tripPriceId);
 
   long countByHotelTripPrice_Id(int tripPriceId);
+
+  void deleteByTrip_Id(int tripId);
 }

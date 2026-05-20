@@ -8,25 +8,40 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 
+import com.roamroute.backend.dto.CreateTripRequest;
 import com.roamroute.backend.dto.TripDetailsDTO;
 import com.roamroute.backend.dto.TripHomeDTO;
 import com.roamroute.backend.dto.TripPriceDTO;
 import com.roamroute.backend.dto.UpdateTripRequest;
+import com.roamroute.backend.entity.Destination;
 import com.roamroute.backend.entity.Trip;
+import com.roamroute.backend.repository.DestinationRepository;
+import com.roamroute.backend.repository.OrderRepository;
+import com.roamroute.backend.repository.SelectedPackageRepository;
 import com.roamroute.backend.repository.TripPriceRepository;
 import com.roamroute.backend.repository.TripRepository;
 
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TripService {
 
     private final TripRepository tripRepository;
     private final TripPriceRepository tripPriceRepository;
+    private final DestinationRepository destinationRepository;
+    private final OrderRepository orderRepository;
+    private final SelectedPackageRepository selectedPackageRepository;
 
     public TripService(TripRepository tripRepository,
-                       TripPriceRepository tripPriceRepository) {
+                       TripPriceRepository tripPriceRepository,
+                       DestinationRepository destinationRepository,
+                       OrderRepository orderRepository,
+                       SelectedPackageRepository selectedPackageRepository) {
         this.tripRepository = tripRepository;
         this.tripPriceRepository = tripPriceRepository;
+        this.destinationRepository = destinationRepository;
+        this.orderRepository = orderRepository;
+        this.selectedPackageRepository = selectedPackageRepository;
     }
 
     public List<TripHomeDTO> getHomeTrips() {
@@ -137,6 +152,30 @@ public class TripService {
         );
     }
 
+    public TripDetailsDTO createTrip(CreateTripRequest request) {
+        int nextId = tripRepository.findMaxId() + 1;
+
+        Destination destination = null;
+        if (request.getDestinationId() != null) {
+            destination = destinationRepository.findById(request.getDestinationId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Destination not found"));
+        }
+
+        Trip trip = new Trip();
+        trip.setId(nextId);
+        trip.setTitle(request.getTitle());
+        trip.setTrip_description(request.getDescription());
+        trip.setImage_url(request.getImageUrl());
+        trip.setStart_date(request.getStartDate() != null ? Date.valueOf(request.getStartDate()) : null);
+        trip.setEnd_date(request.getEndDate() != null ? Date.valueOf(request.getEndDate()) : null);
+        trip.setKeywords(request.getKeywords() != null ? String.join(",", request.getKeywords()) : null);
+        trip.setDestination(destination);
+        trip.setActive(true);
+
+        tripRepository.save(trip);
+        return getTripDetails(nextId);
+    }
+
     public TripDetailsDTO updateTrip(int id, UpdateTripRequest request) {
         Trip trip = tripRepository.findById(id).orElseThrow();
 
@@ -217,5 +256,19 @@ public class TripService {
         return tripRepository.findAll().stream()
             .map(this::toTripHomeDTO)
             .toList();
+    }
+
+    @Transactional
+    public void deleteTrip(int id) {
+        if (!tripRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found");
+        }
+        if (orderRepository.existsByTrip_Id(id)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                "Cannot delete a trip that has existing orders");
+        }
+        selectedPackageRepository.deleteByTrip_Id(id);
+        tripPriceRepository.deleteByTrip_Id(id);
+        tripRepository.deleteById(id);
     }
 }

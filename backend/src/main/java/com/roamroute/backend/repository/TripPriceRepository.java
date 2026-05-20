@@ -15,4 +15,6 @@ public interface TripPriceRepository extends JpaRepository<TripPrice, Integer> {
 
   long countByFlight_Id(int flightId);
   long countByAccommodation_Id(int accommodationId);
+
+  void deleteByTrip_Id(int tripId);
 }

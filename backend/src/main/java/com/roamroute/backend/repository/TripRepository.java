@@ -46,4 +46,7 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 
   List<Trip> findByActiveTrue();
 
+  @Query("SELECT COALESCE(MAX(t.id), 0) FROM Trip t")
+  int findMaxId();
+
 }
