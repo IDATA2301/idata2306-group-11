@@ -24,8 +24,12 @@ import com.roamroute.backend.entity.User;
 import com.roamroute.backend.repository.OrderRepository;
 import com.roamroute.backend.repository.UserRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/admin")
+@Tag(name = "Admin / Users", description = "Manage user accounts and roles")
 public class AdminController {
 
   private final UserRepository userRepository;
@@ -37,6 +41,7 @@ public class AdminController {
   }
 
   @GetMapping("/users")
+  @Operation(summary = "List all users (admin)")
   public List<AdminUsersDTO> getAllUsers(Authentication authentication) {
     System.out.println(authentication.getName());
     System.out.println(authentication.getAuthorities());
@@ -48,6 +53,7 @@ public class AdminController {
   }
 
   @GetMapping("/users/{id}")
+  @Operation(summary = "Get full details for a single user (admin)")
   public AdminUserDetailsDTO getUserDetailsById(@PathVariable int id) {
 
     User user = userRepository.findById(id)
@@ -57,6 +63,7 @@ public class AdminController {
   }
   
   @GetMapping("/users/{id}/orders")
+  @Operation(summary = "List orders for a specific user (admin)")
   public List<AdminUsersOrdersDTO> getOrdersByUser(@PathVariable int id) {
     return orderRepository.findByUser_Id(id)
       .stream()
@@ -81,6 +88,7 @@ public class AdminController {
   }
 
   @PutMapping("/users/{id}/role")
+  @Operation(summary = "Update a user's role (USER or ADMIN)")
   public AdminUsersDTO updateUserRole(@PathVariable int id, @RequestBody UpdateUserRoleRequest request) {
     User user = userRepository.findById(id)
       .orElseThrow(() -> new RuntimeException("User not found"));
@@ -97,4 +105,5 @@ public class AdminController {
 
     return new AdminUsersDTO(updatedUser.getId(), updatedUser.getUser_name(), updatedUser.getEmail(), updatedUser.getUser_role());
   }
+
 }

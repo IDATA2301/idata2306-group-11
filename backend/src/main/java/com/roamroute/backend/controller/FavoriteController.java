@@ -22,9 +22,13 @@ import com.roamroute.backend.repository.TripRepository;
 import com.roamroute.backend.repository.UserRepository;
 import com.roamroute.backend.service.TripService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/favorites")
 @CrossOrigin
+@Tag(name = "Favorites", description = "Trip favorites for the authenticated user")
 public class FavoriteController {
   private final FavoriteRepository favoriteRepository;
   private final TripRepository tripRepository;
@@ -42,6 +46,7 @@ public class FavoriteController {
   }
 
   @PostMapping
+  @Operation(summary = "Add a trip to the authenticated user's favorites")
   public Favorite addFavorite(Authentication authentication, @RequestParam int tripId) {
 
     String userEmail = authentication.getName();
@@ -62,6 +67,7 @@ public class FavoriteController {
   }
 
   @GetMapping
+  @Operation(summary = "List favorite records for the authenticated user")
   public List<Favorite> getFavoritesByUserEmail(Authentication authentication) {
     String email = authentication.getName();
     User user = userRepository.findByEmail(email).orElseThrow();
@@ -69,6 +75,7 @@ public class FavoriteController {
   }
 
   @GetMapping("/trips")
+  @Operation(summary = "List favorited trips for the authenticated user")
   public List<TripHomeDTO> getFavoriteTrips(Authentication authentication) {
     String email = authentication.getName();
     User user = userRepository.findByEmail(email).orElseThrow();
@@ -79,6 +86,7 @@ public class FavoriteController {
   }
 
   @DeleteMapping("/{tripId}")
+  @Operation(summary = "Remove a trip from the authenticated user's favorites")
   public void removeFavorite(Authentication authentication, @PathVariable int tripId) {
     String email = authentication.getName();
     User user = userRepository.findByEmail(email).orElseThrow();

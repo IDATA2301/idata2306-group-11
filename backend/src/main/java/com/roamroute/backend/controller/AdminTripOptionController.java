@@ -18,8 +18,12 @@ import com.roamroute.backend.dto.HotelOptionDTO;
 import com.roamroute.backend.dto.HotelOptionRequest;
 import com.roamroute.backend.service.TripOptionService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/admin/trips/{tripId}")
+@Tag(name = "Admin / Trip Options", description = "Manage flight and hotel pricing options per trip")
 public class AdminTripOptionController {
 
   private final TripOptionService tripOptionService;
@@ -29,17 +33,20 @@ public class AdminTripOptionController {
   }
 
   @GetMapping("/flight-options")
+  @Operation(summary = "List flight pricing options for a trip")
   public List<FlightOptionDTO> listFlightOptions(@PathVariable int tripId) {
     return tripOptionService.listFlightOptions(tripId);
   }
 
   @PostMapping("/flight-options")
+  @Operation(summary = "Add a flight pricing option to a trip")
   public FlightOptionDTO createFlightOption(@PathVariable int tripId,
                                             @RequestBody FlightOptionRequest request) {
     return tripOptionService.createFlightOption(tripId, request);
   }
 
   @PutMapping("/flight-options/{tripPriceId}")
+  @Operation(summary = "Update a flight pricing option")
   public FlightOptionDTO updateFlightOption(@PathVariable int tripId,
                                             @PathVariable int tripPriceId,
                                             @RequestBody FlightOptionRequest request) {
@@ -47,6 +54,7 @@ public class AdminTripOptionController {
   }
 
   @DeleteMapping("/flight-options/{tripPriceId}")
+  @Operation(summary = "Delete a flight pricing option")
   public ResponseEntity<Void> deleteFlightOption(@PathVariable int tripId,
                                                  @PathVariable int tripPriceId) {
     tripOptionService.deleteFlightOption(tripId, tripPriceId);
@@ -54,17 +62,20 @@ public class AdminTripOptionController {
   }
 
   @GetMapping("/hotel-options")
+  @Operation(summary = "List hotel pricing options for a trip")
   public List<HotelOptionDTO> listHotelOptions(@PathVariable int tripId) {
     return tripOptionService.listHotelOptions(tripId);
   }
 
   @PostMapping("/hotel-options")
+  @Operation(summary = "Add a hotel pricing option to a trip")
   public HotelOptionDTO createHotelOption(@PathVariable int tripId,
                                           @RequestBody HotelOptionRequest request) {
     return tripOptionService.createHotelOption(tripId, request);
   }
 
   @PutMapping("/hotel-options/{tripPriceId}")
+  @Operation(summary = "Update a hotel pricing option")
   public HotelOptionDTO updateHotelOption(@PathVariable int tripId,
                                           @PathVariable int tripPriceId,
                                           @RequestBody HotelOptionRequest request) {
@@ -72,6 +83,7 @@ public class AdminTripOptionController {
   }
 
   @DeleteMapping("/hotel-options/{tripPriceId}")
+  @Operation(summary = "Delete a hotel pricing option")
   public ResponseEntity<Void> deleteHotelOption(@PathVariable int tripId,
                                                 @PathVariable int tripPriceId) {
     tripOptionService.deleteHotelOption(tripId, tripPriceId);

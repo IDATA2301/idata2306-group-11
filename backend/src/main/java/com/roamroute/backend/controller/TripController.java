@@ -12,8 +12,14 @@ import com.roamroute.backend.dto.TripDetailsDTO;
 import com.roamroute.backend.dto.TripHomeDTO;
 import com.roamroute.backend.service.TripService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/trips")
+@SecurityRequirements
+@Tag(name = "Trips", description = "Public trip browsing and search")
 public class TripController {
 
     private final TripService tripService;
@@ -23,6 +29,7 @@ public class TripController {
     }
 
     @GetMapping("/search")
+    @Operation(summary = "Search trips by text, price range, and destination")
     public List<TripHomeDTO> searchTrips(
         @RequestParam(required = false) String q,
         @RequestParam(required = false) Double minPrice,
@@ -33,11 +40,13 @@ public class TripController {
     }
 
     @GetMapping("/home")
+    @Operation(summary = "List trips featured on the home page")
     public List<TripHomeDTO> getHomeTrips() {
         return tripService.getHomeTrips();
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get full details of a single trip")
     public TripDetailsDTO getTripById(@PathVariable int id) {
         return tripService.getTripDetails(id);
     }

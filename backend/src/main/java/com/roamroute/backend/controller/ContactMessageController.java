@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.roamroute.backend.entity.ContactMessage;
 import com.roamroute.backend.repository.ContactMessageRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/contact")
+@Tag(name = "Contact", description = "Contact form submissions")
 public class ContactMessageController {
 
   private final ContactMessageRepository contactMessageRepository;
@@ -22,11 +27,14 @@ public class ContactMessageController {
   }
 
   @GetMapping
+  @Operation(summary = "List all contact form submissions (admin)")
   public List<ContactMessage> getAllContactMessages() {
     return contactMessageRepository.findAll();
   }
 
   @PostMapping
+  @SecurityRequirements
+  @Operation(summary = "Submit a contact form message")
   public ContactMessage createContactMessage(@RequestBody ContactMessage contactMessage) {
     return contactMessageRepository.save(contactMessage);
   }
