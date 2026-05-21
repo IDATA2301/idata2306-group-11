@@ -76,6 +76,14 @@ Table contactmessages {
 }
 
 
+Table selectedpackages {
+  id int [pk, increment]
+  trip_id int
+  flight_tripprice_id int
+  hotel_tripprice_id int
+}
+
+
 Table orders {
   id int [pk, increment]
   user_id int [not null]
@@ -101,6 +109,10 @@ Ref: favorites.user_id > users.id
 Ref: favorites.trip_id > trips.id
 
 Ref: contactmessages.user_id > users.id
+
+Ref: selectedpackages.trip_id > trips.id
+Ref: selectedpackages.flight_tripprice_id > tripprices.id
+Ref: selectedpackages.hotel_tripprice_id > tripprices.id
 
 Ref: orders.user_id > users.id
 Ref: orders.trip_id > trips.id
