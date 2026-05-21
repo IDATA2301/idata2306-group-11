@@ -24,6 +24,9 @@ import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.repository.TripRepository;
 import com.roamroute.backend.service.TripService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 /**
  * Administrative controller for managing trips.
  *
@@ -32,6 +35,7 @@ import com.roamroute.backend.service.TripService;
  */
 @RestController
 @RequestMapping("/api/admin/trips")
+@Tag(name = "Admin / Trips", description = "Manage trips catalog")
 public class AdminTripController {
 
   private final TripService tripService;
@@ -44,29 +48,34 @@ public class AdminTripController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
+  @Operation(summary = "Create a new trip")
   public TripDetailsDTO createTrip(@RequestBody CreateTripRequest request) {
     return tripService.createTrip(request);
   }
 
 
 	@GetMapping
+	@Operation(summary = "List all trips (admin, including inactive)")
 	public List<TripHomeDTO> getAllTripsForAdmin() {
 		return tripService.getAllTripsForAdmin();
 	}
   
   @PutMapping("/{id}")
+  @Operation(summary = "Update an existing trip")
   public TripDetailsDTO updateTrip(@PathVariable int id, @RequestBody UpdateTripRequest request) {
     return tripService.updateTrip(id, request);
   }
 
 
   @DeleteMapping("/{id}")
+  @Operation(summary = "Delete a trip")
   public ResponseEntity<Void> deleteTrip(@PathVariable int id) {
     tripService.deleteTrip(id);
     return ResponseEntity.noContent().build();
   }
 
   @PatchMapping("/{id}/toggle")
+  @Operation(summary = "Toggle a trip's active/inactive status")
   public Trip toggleTrip(@PathVariable int id) {
     Trip trip = tripRepository.findById(id)
       .orElseThrow(() ->

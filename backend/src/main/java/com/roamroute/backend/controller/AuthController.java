@@ -133,6 +133,8 @@ public class AuthController {
   }
 
       @PostMapping("/forgot-password")
+      @SecurityRequirements
+      @Operation(summary = "Request a password reset email for the given address")
       public void forgotPassword(@RequestBody Map<String, String> request) {
         String email = request.get("email");
         
@@ -167,6 +169,8 @@ public class AuthController {
       }
 
   @PostMapping("/reset-password")
+  @SecurityRequirements
+  @Operation(summary = "Reset a password using a token received by email")
   public void resetPassword(@RequestBody Map<String, String> request) {
     String token = request.get("token");
     String newPassword = request.get("password");
