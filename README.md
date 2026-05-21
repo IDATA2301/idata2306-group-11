@@ -2,6 +2,9 @@
 
 Spring Boot 4 REST API for the RoamRoute trip-booking app. Companion to the React frontend at https://github.com/IDATA2301/idata2301-group11.
 
+RoamRoute is a student project website, aiming to make trip planning easier by combinging destinations, flights and hotels into single trip packages.
+This application provides a backend REST API for a small trip-booking application used by the course project. It exposes endpoints for destinations, flights, trips and bookings, persists data in MySQL, and uses JWT for authentication.
+
 ## Stack
 
 - Java 21, Spring Boot 4.0.2 (Maven)
