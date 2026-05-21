@@ -51,6 +51,7 @@ public class ContactMessageController {
   @SecurityRequirements
   @Operation(summary = "Submit a contact form message")
   public ContactMessage createContactMessage(@RequestBody ContactMessage contactMessage) {
+    contactMessage.setCreated_at(new java.sql.Date(System.currentTimeMillis()));
     ContactMessage saved = contactMessageRepository.save(contactMessage);
 
     String from = contactMessage.getSenderEmail() != null ? contactMessage.getSenderEmail() : "unknown";
