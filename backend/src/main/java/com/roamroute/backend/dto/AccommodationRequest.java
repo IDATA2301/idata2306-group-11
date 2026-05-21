@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Request object used to create or update accommodation (hotel) records.
+ *
+ * <p>Captures mutable hotel details such as name, type, location, amenities and stay
+ * duration from client requests. Fields are optional to support partial updates.
+ */
 public class AccommodationRequest {
 
   private String hotelName;

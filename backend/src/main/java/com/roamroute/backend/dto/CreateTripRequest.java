@@ -2,6 +2,12 @@ package com.roamroute.backend.dto;
 
 import java.util.List;
 
+/**
+ * Request object for creating a new trip.
+ *
+ * <p>Captures trip metadata such as title, description, travel dates, keywords
+ * and an associated destination. Used by the admin UI to define new trips.
+ */
 public class CreateTripRequest {
 
   private String title;

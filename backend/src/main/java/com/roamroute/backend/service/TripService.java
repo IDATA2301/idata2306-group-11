@@ -24,6 +24,9 @@ import com.roamroute.backend.repository.TripRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+/**
+ * Service for managing trips including CRUD operations, search, and retrieval of trip details with associated pricing options.
+ */
 public class TripService {
 
     private final TripRepository tripRepository;

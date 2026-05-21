@@ -23,6 +23,13 @@ import com.roamroute.backend.repository.TripRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Administrative controller for managing destinations.
+ *
+ * <p>Supports CRUD operations on destinations and prevents deletion when a
+ * destination is referenced by existing trips. Converts between the
+ * {@code Destination} entity and DTOs used by the API.
+ */
 @RestController
 @RequestMapping("/api/admin/destinations")
 @Tag(name = "Admin / Destinations", description = "Manage destinations catalog")

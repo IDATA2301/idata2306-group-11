@@ -14,6 +14,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 @Service
+/**
+ * Service for generating and parsing JWT tokens with email and role claims for user authentication.
+ */
 public class JwtService {
 
   private final SecretKey signingKey;

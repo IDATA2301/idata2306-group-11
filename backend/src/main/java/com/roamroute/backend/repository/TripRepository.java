@@ -9,6 +9,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.roamroute.backend.entity.Trip;
 
+/**
+ * Spring Data JPA repository for Trip entity, providing custom query methods for searching active trips and random trip selection.
+ */
 public interface TripRepository extends JpaRepository<Trip, Integer> {
 
   @Query(value = "SELECT * FROM trips WHERE active = true ORDER BY RAND() LIMIT 3", nativeQuery = true)

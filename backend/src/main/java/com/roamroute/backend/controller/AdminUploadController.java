@@ -14,6 +14,12 @@ import com.roamroute.backend.service.ImageStorageService.Category;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Admin endpoints for uploading images used by trips and destinations.
+ *
+ * <p>Accepts multipart uploads and returns the stored filename. Files are
+ * persisted via {@link com.roamroute.backend.service.ImageStorageService}.
+ */
 @RestController
 @RequestMapping("/api/admin/uploads")
 @Tag(name = "Admin / Uploads", description = "Image uploads for trips and destinations")

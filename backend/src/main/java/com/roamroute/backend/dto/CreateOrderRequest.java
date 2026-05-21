@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Request payload for placing a new order.
+ *
+ * <p>Contains IDs of the trip, flight option and accommodation option that the
+ * user wishes to order. The backend combines these to create a single order.
+ */
 public class CreateOrderRequest {
   private int tripId;
   private int flightPriceId;

@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 
+/**
+ * Public controller exposing destination data to clients.
+ *
+ * <p>Provides a simple read-only endpoint to list available destinations used
+ * by the public-facing UI. Data is fetched from the {@link com.roamroute.backend.repository.DestinationRepository}.
+ */
 @RestController
 @RequestMapping("/api/destinations")
 @SecurityRequirements

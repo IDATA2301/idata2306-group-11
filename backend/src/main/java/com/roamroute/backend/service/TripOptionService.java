@@ -25,6 +25,9 @@ import com.roamroute.backend.repository.TripPriceRepository;
 import com.roamroute.backend.repository.TripRepository;
 
 @Service
+/**
+ * Service for managing flight and hotel pricing options for trips, including CRUD operations with referential integrity checks.
+ */
 public class TripOptionService {
 
   private final TripRepository tripRepository;

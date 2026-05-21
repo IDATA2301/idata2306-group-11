@@ -1,5 +1,8 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Request payload for updating a user's username.
+ */
 public class UpdateUsernameRequest {
 
   private String userName;

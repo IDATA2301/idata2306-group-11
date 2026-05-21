@@ -16,6 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
+/**
+ * Service for storing uploaded images on disk with validation, sanitization, and support for multiple image categories.
+ */
 public class ImageStorageService {
 
   private static final Set<String> ALLOWED_EXTENSIONS = Set.of("jpg", "jpeg", "png", "webp", "gif");

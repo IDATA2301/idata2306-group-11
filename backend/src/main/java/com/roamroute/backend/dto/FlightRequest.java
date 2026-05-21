@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Request for creating or updating a flight record.
+ *
+ * <p>Contains flight details such as airline, departure/destination cities and
+ * airports, and duration. Used by admins to add or modify flights in the catalog.
+ */
 public class FlightRequest {
 
   private String airline;

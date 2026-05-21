@@ -2,6 +2,9 @@ package com.roamroute.backend.dto;
 
 import java.sql.Date;
 
+/**
+ * DTO for displaying a trip summary on the home/listing page with essential trip details and lowest available price.
+ */
 public class TripHomeDTO {
   private int id;
   private String title;

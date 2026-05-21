@@ -10,6 +10,13 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+/**
+ * Application CORS configuration.
+ *
+ * <p>Defines allowed origins, methods and headers and exposes a {@link CorsConfigurationSource}
+ * bean that registers these rules under the `/api/**` path. The allowed origins are read
+ * from the `app.cors.allowed-origins` property so they can be adjusted per-environment.
+ */
 @Configuration
 public class CorsConfig {
 
@@ -19,6 +26,11 @@ public class CorsConfig {
     this.allowedOrigins = allowedOrigins;
   }
 
+  /**
+   * Create and expose a {@link CorsConfigurationSource} used by Spring Security / MVC.
+   *
+   * @return configured CORS source that applies to `/api/**` endpoints
+   */
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration config = new CorsConfiguration();

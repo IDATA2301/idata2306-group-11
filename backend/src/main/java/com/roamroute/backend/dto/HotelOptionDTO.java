@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * DTO representing a hotel pricing option for a trip.
+ *
+ * <p>Contains pricing (price, provider) and full hotel details (name, type, location,
+ * amenities, stay duration, coordinates). Used to show hotel options to users.
+ */
 public class HotelOptionDTO {
 
   private int id;

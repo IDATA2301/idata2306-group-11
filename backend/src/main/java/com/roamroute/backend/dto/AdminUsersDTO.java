@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * DTO for listing users in the admin interface.
+ *
+ * <p>Provides a summary of user information (ID, username, email, role) suitable
+ * for admin user management screens and bulk user listings.
+ */
 public class AdminUsersDTO {
   private int id;
   private String username;

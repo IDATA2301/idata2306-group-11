@@ -8,6 +8,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "flights")
+/**
+ * JPA entity representing a flight offering with airline, departure/destination cities and airports, and flight duration.
+ */
 public class Flight {
 
   @Id

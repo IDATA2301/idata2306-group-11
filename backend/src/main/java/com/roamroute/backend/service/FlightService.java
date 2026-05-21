@@ -14,6 +14,9 @@ import com.roamroute.backend.repository.FlightRepository;
 import com.roamroute.backend.repository.TripPriceRepository;
 
 @Service
+/**
+ * Service for managing flight entities with CRUD operations and validation to prevent deletion of referenced flights.
+ */
 public class FlightService {
 
   private final FlightRepository flightRepository;

@@ -2,6 +2,12 @@ package com.roamroute.backend.dto;
 
 import com.roamroute.backend.entity.Flight;
 
+/**
+ * DTO containing flight details for API responses.
+ *
+ * <p>Includes airline, departure/destination cities and airports, and duration.
+ * Convertible from {@link Flight} entity via the {@code from()} static method.
+ */
 public class FlightDTO {
 
   private int id;

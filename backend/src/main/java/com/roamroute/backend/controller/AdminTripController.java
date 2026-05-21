@@ -24,6 +24,12 @@ import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.repository.TripRepository;
 import com.roamroute.backend.service.TripService;
 
+/**
+ * Administrative controller for managing trips.
+ *
+ * <p>Exposes CRUD endpoints for trips and a small toggle endpoint to activate/deactivate
+ * a trip. The controller delegates business logic to {@link com.roamroute.backend.service.TripService}.
+ */
 @RestController
 @RequestMapping("/api/admin/trips")
 public class AdminTripController {

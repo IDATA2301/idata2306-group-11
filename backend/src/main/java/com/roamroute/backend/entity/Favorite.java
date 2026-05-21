@@ -12,6 +12,9 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name = "favorites", uniqueConstraints = {
   @UniqueConstraint(columnNames = {"user_id", "trip_id"}, name = "unique_user_favorite")
 })
+/**
+ * JPA entity representing a user's favorited trip with a unique constraint preventing duplicate favorites per user.
+ */
 public class Favorite {
 
   @Id

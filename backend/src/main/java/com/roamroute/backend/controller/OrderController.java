@@ -30,6 +30,13 @@ import com.roamroute.backend.dto.CreateOrderRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Controller handling order placement and retrieval for authenticated users.
+ *
+ * <p>Users can place new orders (combining flight and accommodation options)
+ * and retrieve their existing orders. Security checks ensure only the owner
+ * or an admin may view a specific order.
+ */
 @RestController
 @RequestMapping("/api/orders")
 @Tag(name = "Orders", description = "Order placement and retrieval for the authenticated user")

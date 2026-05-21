@@ -19,6 +19,13 @@ import com.roamroute.backend.service.FlightService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Admin controller for managing flight records.
+ *
+ * <p>Provides endpoints to list, retrieve, create, update and delete flight
+ * entries used by the admin UI. Operations delegate to
+ * {@link com.roamroute.backend.service.FlightService}.
+ */
 @RestController
 @RequestMapping("/api/admin/flights")
 @Tag(name = "Admin / Flights", description = "Manage flights catalog")

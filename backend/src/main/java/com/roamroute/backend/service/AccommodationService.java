@@ -14,6 +14,9 @@ import com.roamroute.backend.repository.AccommodationRepository;
 import com.roamroute.backend.repository.TripPriceRepository;
 
 @Service
+/**
+ * Service for managing accommodation entities with CRUD operations and validation to prevent deletion of referenced accommodations.
+ */
 public class AccommodationService {
 
   private final AccommodationRepository accommodationRepository;
