@@ -53,6 +53,13 @@ public class TripService {
             .toList();
     }
 
+    public TripDetailsDTO getTripDetailsForAdmin(int id) {
+        Trip trip = tripRepository.findById(id).orElseThrow(() ->
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found")
+        );
+        return buildTripDetailsDTO(trip);
+    }
+
     public TripDetailsDTO getTripDetails(int id) {
         Trip trip = tripRepository.findById(id).orElseThrow(() ->
             new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found")
@@ -61,6 +68,12 @@ public class TripService {
         if (!trip.isActive()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found");
         }
+
+        return buildTripDetailsDTO(trip);
+    }
+
+    private TripDetailsDTO buildTripDetailsDTO(Trip trip) {
+        int id = trip.getId();
 
         String flightDuration = tripPriceRepository
             .findByTrip_IdAndFlightIsNotNull(id)
@@ -206,7 +219,7 @@ public class TripService {
 
         tripRepository.save(trip);
 
-        return getTripDetails(id);
+        return getTripDetailsForAdmin(id);
     }
 
     public List<TripHomeDTO> searchTrips(String query, Double minPrice, Double maxPrice, Integer destinationId) {

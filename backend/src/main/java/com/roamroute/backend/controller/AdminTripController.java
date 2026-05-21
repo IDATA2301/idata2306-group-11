@@ -60,6 +60,12 @@ public class AdminTripController {
 		return tripService.getAllTripsForAdmin();
 	}
   
+  @GetMapping("/{id}")
+  @Operation(summary = "Get a single trip by ID (admin, including inactive)")
+  public TripDetailsDTO getTrip(@PathVariable int id) {
+    return tripService.getTripDetailsForAdmin(id);
+  }
+
   @PutMapping("/{id}")
   @Operation(summary = "Update an existing trip")
   public TripDetailsDTO updateTrip(@PathVariable int id, @RequestBody UpdateTripRequest request) {
