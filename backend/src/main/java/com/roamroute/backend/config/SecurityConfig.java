@@ -12,6 +12,16 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Spring Security configuration for the application.
+ *
+ * <p>Registers a {@link SecurityFilterChain} that:
+ * - disables CSRF (API use),
+ * - enables CORS using the application CORS configuration,
+ * - uses stateless session management (JWT-based auth),
+ * - configures public, admin and authenticated routes, and
+ * - installs the {@link JwtAuthFilter} before the username/password filter.
+ */
 @Configuration
 public class SecurityConfig {
 
@@ -21,6 +31,13 @@ public class SecurityConfig {
     this.jwtAuthFilter = jwtAuthFilter;
   }
 
+  /**
+   * Configure the main HTTP security filter chain for the application.
+   *
+   * @param http the {@link HttpSecurity} to configure
+   * @return the built {@link SecurityFilterChain}
+   * @throws Exception when building the chain fails
+   */
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 

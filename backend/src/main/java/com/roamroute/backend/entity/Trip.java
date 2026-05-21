@@ -11,6 +11,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "trips")
+/**
+ * JPA entity representing a travel trip with destination, dates, description, and searchable keywords.
+ */
 public class Trip {
 
 	@Id

@@ -3,6 +3,12 @@ package com.roamroute.backend.dto;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+/**
+ * DTO representing a user's order for admin inspection.
+ *
+ * <p>Contains order summary data including trip, flight and accommodation details,
+ * pricing, dates and status. Used when an admin views a specific user's orders.
+ */
 public class AdminUsersOrdersDTO {
   private int id;
   private String title;

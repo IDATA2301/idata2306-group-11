@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * DTO containing full user details for admin inspection.
+ *
+ * <p>Exposes user identity (ID, name, email) and role. Used when admins
+ * inspect or modify user accounts.
+ */
 public class AdminUserDetailsDTO {
   private int id;
   private String user_name;

@@ -11,6 +11,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "contactmessages")
+/**
+ * JPA entity representing a contact message submitted by a user or guest with sender and subject information.
+ */
 public class ContactMessage {
 
   @Id

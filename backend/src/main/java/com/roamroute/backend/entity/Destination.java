@@ -8,6 +8,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "destinations")
+/**
+ * JPA entity representing a travel destination with city, country, and associated imagery.
+ */
 public class Destination {
   @Id
   @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

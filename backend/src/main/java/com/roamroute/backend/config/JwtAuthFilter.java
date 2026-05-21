@@ -20,6 +20,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
+/**
+ * Servlet filter that extracts and validates a JWT from the `Authorization` header.
+ *
+ * <p>If a valid token is present the user's email and role are placed into the
+ * {@link org.springframework.security.core.context.SecurityContextHolder} so downstream
+ * security checks can authorize requests. Invalid or expired tokens result in a
+ * 401 response and the security context being cleared.
+ */
 public class JwtAuthFilter extends OncePerRequestFilter {
 
   private static final String BEARER_PREFIX = "Bearer ";

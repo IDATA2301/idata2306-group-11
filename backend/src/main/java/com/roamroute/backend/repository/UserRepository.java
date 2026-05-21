@@ -8,6 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.roamroute.backend.entity.User;
 
+/**
+ * Spring Data JPA repository for User entity, providing custom query methods for email and username lookup.
+ */
 public interface UserRepository extends JpaRepository<User, Integer> {
 
   Optional<User> findByEmail(String email);

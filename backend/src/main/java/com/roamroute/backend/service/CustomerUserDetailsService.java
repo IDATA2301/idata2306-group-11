@@ -9,6 +9,9 @@ import com.roamroute.backend.entity.User;
 import com.roamroute.backend.repository.UserRepository;
 
 @Service
+/**
+ * Spring Security UserDetailsService implementation that loads user authentication details by email from the database.
+ */
 public class CustomerUserDetailsService implements UserDetailsService {
 
   private final UserRepository userRepository;

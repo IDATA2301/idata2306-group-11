@@ -9,6 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+/**
+ * OpenAPI / Swagger configuration for the RoamRoute backend.
+ *
+ * <p>Registers a bearer JWT security scheme and applies it globally so endpoints
+ * in the generated documentation show the authentication requirement.
+ */
 public class OpenApiConfig {
 
   private static final String SECURITY_SCHEME_NAME = "bearerAuth";

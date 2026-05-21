@@ -19,6 +19,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Controller for handling contact form submissions.
+ * 
+ * <p>Accepts contact messages from the public, persists them and forwards a
+ * notification to the support address. Also sends a confirmation email to the
+ * sender when an email address is provided.
+ */
 @RestController
 @RequestMapping("/api/contact")
 @Tag(name = "Contact", description = "Contact form submissions")

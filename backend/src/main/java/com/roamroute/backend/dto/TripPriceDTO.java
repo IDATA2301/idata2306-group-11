@@ -1,5 +1,8 @@
 package com.roamroute.backend.dto;
 
+/**
+ * DTO representing a pricing option for a trip, including provider information and airline details if applicable.
+ */
 public class TripPriceDTO {
   private int id;
   private String provider;

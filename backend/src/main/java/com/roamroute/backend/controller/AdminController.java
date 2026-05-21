@@ -33,6 +33,13 @@ import com.roamroute.backend.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Admin endpoints for managing users, orders and related entities.
+ *
+ * <p>Exposes operations such as listing users, inspecting user orders, updating
+ * orders and user roles, and deleting users or orders. Methods are intended
+ * for administrator use only and rely on repository operations for persistence.
+ */
 @RestController
 @RequestMapping("/api/admin")
 @Tag(name = "Admin / Users", description = "Manage user accounts and roles")

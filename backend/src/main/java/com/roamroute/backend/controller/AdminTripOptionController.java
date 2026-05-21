@@ -21,6 +21,13 @@ import com.roamroute.backend.service.TripOptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Administrative Controller for managing per-trip pricing options (flights and hotels).
+ *
+ * <p>Allows admins to list, create, update and delete flight and hotel pricing
+ * options for a given trip. All operations delegate to
+ * {@link com.roamroute.backend.service.TripOptionService}.
+ */
 @RestController
 @RequestMapping("/api/admin/trips/{tripId}")
 @Tag(name = "Admin / Trip Options", description = "Manage flight and hotel pricing options per trip")

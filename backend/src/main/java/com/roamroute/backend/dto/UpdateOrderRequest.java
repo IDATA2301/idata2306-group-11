@@ -2,6 +2,9 @@ package com.roamroute.backend.dto;
 
 import java.math.BigDecimal;
 
+/**
+ * Request payload for updating an existing order with modified trip, flight, accommodation selections, and price.
+ */
 public class UpdateOrderRequest {
   private int tripId;
   private Integer flightId;

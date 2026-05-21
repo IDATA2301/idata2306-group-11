@@ -16,6 +16,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Public-facing controller for browsing and searching trips.
+ *
+ * <p>Exposes endpoints for searching across trips, listing featured home page
+ * trips and fetching full trip details. All heavy-lifting is delegated to
+ * {@link com.roamroute.backend.service.TripService}.
+ */
 @RestController
 @RequestMapping("/api/trips")
 @SecurityRequirements

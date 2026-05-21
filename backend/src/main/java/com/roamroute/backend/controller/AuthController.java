@@ -30,6 +30,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.UUID;
 
 
+/**
+ * Authentication and user profile endpoints.
+ *
+ * <p>Handles registration, login, password reset flows and profile updates. The
+ * controller is intentionally careful about information disclosure (for
+ * example the forgot-password endpoint does not reveal whether an email exists).
+ */
 @RestController
 @RequestMapping("/api/auth")
 @Tag(name = "Auth", description = "User registration, login and profile management")

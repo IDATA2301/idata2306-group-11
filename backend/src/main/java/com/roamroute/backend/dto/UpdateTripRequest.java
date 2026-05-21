@@ -2,6 +2,9 @@ package com.roamroute.backend.dto;
 
 import java.util.List;
 
+/**
+ * Request payload for updating trip details including title, description, dates, and associated keywords.
+ */
 public class UpdateTripRequest {
 
   private String title;

@@ -16,6 +16,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tripprices")
+/**
+ * JPA entity representing a pricing entry for a trip, linked to either a flight or accommodation with provider and cost details.
+ */
 public class TripPrice {
 
   @Id

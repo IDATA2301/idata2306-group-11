@@ -8,6 +8,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
+/**
+ * JPA entity representing a system user with authentication credentials, profile information, and password reset token management.
+ */
 public class User {
 
   @Id

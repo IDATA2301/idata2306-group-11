@@ -2,6 +2,13 @@ package com.roamroute.backend.dto;
 
 import com.roamroute.backend.entity.Accommodation;
 
+/**
+ * Data transfer object for accommodation (hotel) data.
+ *
+ * <p>Contains hotel details including name, type, location, amenities, stay duration
+ * and coordinates. Used by the API to expose accommodation information in a clean,
+ * controlled shape.
+ */
 public class AccommodationDTO {
 
   private int id;

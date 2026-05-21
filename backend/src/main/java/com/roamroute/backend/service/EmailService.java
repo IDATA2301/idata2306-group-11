@@ -8,6 +8,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
+/**
+ * Service for sending emails via the Resend email provider using WebClient for reactive HTTP requests.
+ * Provides high-level helpers for sending password reset emails and a generic send method used across the app.
+ */
 public class EmailService {
 
     private final WebClient webClient;

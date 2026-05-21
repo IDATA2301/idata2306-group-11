@@ -12,6 +12,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "orders")
+/**
+ * JPA entity representing a user's booking order containing selected trip, flight, accommodation, and pricing information.
+ */
 public class Order {
 
   @Id

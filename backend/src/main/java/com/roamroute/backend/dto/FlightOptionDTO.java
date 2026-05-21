@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * DTO representing a flight pricing option for a trip.
+ *
+ * <p>Contains pricing information (price, provider) along with flight details
+ * (airline, airports, duration). Used to display flight options to users.
+ */
 public class FlightOptionDTO {
 
   private int id;

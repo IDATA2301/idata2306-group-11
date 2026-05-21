@@ -25,6 +25,12 @@ import com.roamroute.backend.service.TripService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Controller for managing authenticated user's favorites.
+ *
+ * <p>Allows adding, listing and removing favorites, and provides an endpoint
+ * that returns the favorited trips as `TripHomeDTO` objects for the UI.
+ */
 @RestController
 @RequestMapping("/api/favorites")
 @CrossOrigin

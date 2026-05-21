@@ -8,6 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * MVC configuration handling static resource exposure for uploaded files.
+ *
+ * <p>Maps a configured upload directory (from `app.upload.dir`) to a public URL
+ * prefix (from `app.upload.url-prefix`) so uploaded images can be served as
+ * static resources.
+ */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 

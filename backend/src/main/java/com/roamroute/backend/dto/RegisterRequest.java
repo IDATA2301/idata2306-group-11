@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Request payload for user registration.
+ *
+ * <p>Contains required registration fields (full name, email, password) and optional
+ * profile fields (address, country).
+ */
 public class RegisterRequest {
 
   private String fullName;

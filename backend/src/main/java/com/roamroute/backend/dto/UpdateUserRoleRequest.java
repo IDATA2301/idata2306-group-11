@@ -1,5 +1,8 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Request payload for updating a user's role (admin, user, etc.).
+ */
 public class UpdateUserRoleRequest {
   private String role;
 

@@ -1,5 +1,8 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Request payload for updating destination information including city, country, and associated imagery.
+ */
 public class UpdateDestinationRequest {
 
   private String city;

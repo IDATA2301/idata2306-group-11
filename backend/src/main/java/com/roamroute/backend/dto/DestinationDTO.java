@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * DTO for destination (country/city) information.
+ *
+ * <p>Exposes destination metadata including city, country, and associated image
+ * URL and alt text for display in the UI.
+ */
 public class DestinationDTO {
 
   private int id;

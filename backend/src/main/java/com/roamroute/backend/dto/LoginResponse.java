@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Response returned after successful authentication.
+ *
+ * <p>Contains user identity information (ID, name, email, role) and a JWT token
+ * for subsequent authenticated requests. Returned by both login and registration.
+ */
 public class LoginResponse {
 
   private int id;

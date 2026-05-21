@@ -9,6 +9,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "selectedpackages")
+/**
+ * JPA entity representing a selected package containing a trip with chosen flight and hotel pricing options.
+ */
 public class SelectedPackage {
 
   @Id

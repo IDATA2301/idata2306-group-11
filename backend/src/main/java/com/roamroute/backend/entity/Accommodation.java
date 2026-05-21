@@ -7,6 +7,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "accommodations")
+/**
+ * JPA entity representing a hotel accommodation offering with location and amenity details.
+ */
 public class Accommodation {
 
 	@Id

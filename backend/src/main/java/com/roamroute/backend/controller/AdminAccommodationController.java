@@ -19,6 +19,13 @@ import com.roamroute.backend.service.AccommodationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Administrative REST controller for managing accommodations.
+ *
+ * <p>Provides endpoints for listing, retrieving, creating, updating and deleting
+ * accommodations used by the admin UI. All methods delegate to the
+ * {@link com.roamroute.backend.service.AccommodationService}.
+ */
 @RestController
 @RequestMapping("/api/admin/accommodations")
 @Tag(name = "Admin / Accommodations", description = "Manage accommodations catalog")

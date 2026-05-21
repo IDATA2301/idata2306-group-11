@@ -2,6 +2,9 @@ package com.roamroute.backend.dto;
 
 import java.util.List;
 
+/**
+ * DTO for displaying detailed trip information including flights, accommodations, and destination metadata.
+ */
 public class TripDetailsDTO {
 
     private int id;

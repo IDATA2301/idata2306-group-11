@@ -1,5 +1,11 @@
 package com.roamroute.backend.dto;
 
+/**
+ * Request payload for user login.
+ *
+ * <p>Contains email and password credentials that the backend validates against
+ * stored user records.
+ */
 public class LoginRequest {
 
   private String email;
