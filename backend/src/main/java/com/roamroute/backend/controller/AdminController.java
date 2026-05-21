@@ -116,7 +116,7 @@ public class AdminController {
   }
 
   @PutMapping("/orders/{id}")
-  @Operation(summary = "Update an order's trip, flight, accommodation, status, and price (admin)")
+  @Operation(summary = "Update an order's trip, flight, accommodation, status, and price (admin)", tags = {"Admin / Orders"})
   public AdminUsersOrdersDTO updateOrder(@PathVariable int id, @RequestBody UpdateOrderRequest request) {
     Order order = orderRepository.findById(id)
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
@@ -156,7 +156,7 @@ public class AdminController {
   }
 
   @DeleteMapping("/orders/{id}")
-  @Operation(summary = "Delete an order (admin)")
+  @Operation(summary = "Delete an order (admin)", tags = {"Admin / Orders"})
   public ResponseEntity<Void> deleteOrder(@PathVariable int id) {
     if (!orderRepository.existsById(id)) {
       return ResponseEntity.notFound().build();
