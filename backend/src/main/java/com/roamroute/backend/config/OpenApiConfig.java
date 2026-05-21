@@ -5,6 +5,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.tags.Tag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,6 +33,22 @@ public class OpenApiConfig {
                 .name(SECURITY_SCHEME_NAME)
                 .type(SecurityScheme.Type.HTTP)
                 .scheme("bearer")
-                .bearerFormat("JWT")));
+                .bearerFormat("JWT")))
+        // Public / user-facing tags first, admin tags last.
+        // Swagger UI displays tags in spec order when tagsSorter is not set.
+        .addTagsItem(new Tag().name("Auth"))
+        .addTagsItem(new Tag().name("Trips"))
+        .addTagsItem(new Tag().name("Destinations"))
+        .addTagsItem(new Tag().name("Favorites"))
+        .addTagsItem(new Tag().name("Orders"))
+        .addTagsItem(new Tag().name("Contact"))
+        .addTagsItem(new Tag().name("Admin / Users"))
+        .addTagsItem(new Tag().name("Admin / Orders"))
+        .addTagsItem(new Tag().name("Admin / Trips"))
+        .addTagsItem(new Tag().name("Admin / Trip Options"))
+        .addTagsItem(new Tag().name("Admin / Accommodations"))
+        .addTagsItem(new Tag().name("Admin / Flights"))
+        .addTagsItem(new Tag().name("Admin / Destinations"))
+        .addTagsItem(new Tag().name("Admin / Uploads"));
   }
 }

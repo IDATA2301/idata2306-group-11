@@ -25,6 +25,8 @@ import com.roamroute.backend.entity.Order;
 import com.roamroute.backend.entity.Trip;
 import com.roamroute.backend.entity.User;
 import com.roamroute.backend.repository.AccommodationRepository;
+import com.roamroute.backend.repository.ContactMessageRepository;
+import com.roamroute.backend.repository.FavoriteRepository;
 import com.roamroute.backend.repository.FlightRepository;
 import com.roamroute.backend.repository.OrderRepository;
 import com.roamroute.backend.repository.TripRepository;
@@ -47,15 +49,20 @@ public class AdminController {
 
   private final UserRepository userRepository;
   private final OrderRepository orderRepository;
+  private final FavoriteRepository favoriteRepository;
+  private final ContactMessageRepository contactMessageRepository;
   private final TripRepository tripRepository;
   private final FlightRepository flightRepository;
   private final AccommodationRepository accommodationRepository;
 
   public AdminController(UserRepository userRepository, OrderRepository orderRepository,
+      FavoriteRepository favoriteRepository, ContactMessageRepository contactMessageRepository,
       TripRepository tripRepository, FlightRepository flightRepository,
       AccommodationRepository accommodationRepository) {
     this.userRepository = userRepository;
     this.orderRepository = orderRepository;
+    this.favoriteRepository = favoriteRepository;
+    this.contactMessageRepository = contactMessageRepository;
     this.tripRepository = tripRepository;
     this.flightRepository = flightRepository;
     this.accommodationRepository = accommodationRepository;
@@ -109,7 +116,7 @@ public class AdminController {
   }
 
   @PutMapping("/orders/{id}")
-  @Operation(summary = "Update an order's trip, flight, accommodation, status, and price (admin)")
+  @Operation(summary = "Update an order's trip, flight, accommodation, status, and price (admin)", tags = {"Admin / Orders"})
   public AdminUsersOrdersDTO updateOrder(@PathVariable int id, @RequestBody UpdateOrderRequest request) {
     Order order = orderRepository.findById(id)
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
@@ -149,7 +156,7 @@ public class AdminController {
   }
 
   @DeleteMapping("/orders/{id}")
-  @Operation(summary = "Delete an order (admin)")
+  @Operation(summary = "Delete an order (admin)", tags = {"Admin / Orders"})
   public ResponseEntity<Void> deleteOrder(@PathVariable int id) {
     if (!orderRepository.existsById(id)) {
       return ResponseEntity.notFound().build();
@@ -164,6 +171,9 @@ public class AdminController {
     if (!userRepository.existsById(id)) {
       return ResponseEntity.notFound().build();
     }
+    orderRepository.deleteAll(orderRepository.findByUser_Id(id));
+    favoriteRepository.deleteAll(favoriteRepository.findByUser_Id(id));
+    contactMessageRepository.deleteAll(contactMessageRepository.findByUser_Id(id));
     userRepository.deleteById(id);
     return ResponseEntity.noContent().build();
   }
